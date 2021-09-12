@@ -763,9 +763,9 @@ const PerfilCliente = (props) => {
                         <TableCell>
                           <Button
                             onClick={() => eliminarTelefono(telefono)}
-                            color="secondary"
+                            color="error"
                             style={style.submit.submitTabla}
-                            label="Administrar"
+                            label="Eliminar"
                           >
                             Eliminar
                           </Button>
@@ -891,9 +891,9 @@ const PerfilCliente = (props) => {
                         <TableCell>
                           <Button
                             onClick={() => eliminarDireccion(direccion)}
-                            color="secondary"
+                            color="error"
                             style={style.submit.submitTabla}
-                            label="Administrar"
+                            label="Eliminar"
                           >
                             Eliminar
                           </Button>
@@ -1068,9 +1068,9 @@ const PerfilCliente = (props) => {
                       <TableCell>
                         <Button
                           onClick={() => eliminarRed(red)}
-                          color="secondary"
+                          color="error"
                           style={style.submit.submitTabla}
-                          label="Administrar"
+                          label="Eliminar"
                         >
                           Eliminar
                         </Button>

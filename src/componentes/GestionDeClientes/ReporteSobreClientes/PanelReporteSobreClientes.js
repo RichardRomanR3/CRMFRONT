@@ -6,11 +6,11 @@ import {
   TextField,
   CircularProgress,
 } from '@material-ui/core';
-import TSugerencias from './TSugerencias';
+import TSugerencias from './TReporteSobreClientes';
 import SearchIcon from '@material-ui/icons/Search';
 import style from '../../Tools/Style';
 import { listarSugerencias } from '../../../actions/SugerenciasAction';
-export default function PanelDeSugerencias() {
+export default function PanelReporteSobreClientes() {
   const mounted = useRef(true);
   const [DataS, setDataS] = useState([]);
   const [term, setTerm] = useState('');

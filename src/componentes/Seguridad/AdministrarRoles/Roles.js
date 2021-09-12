@@ -180,12 +180,12 @@ const Roles = (props) => {
                           onClick={() => modificarRol(rol)}
                           label="Editar"
                         >
-                          EDITAR
+                          Editar
                         </Button>
                       ) : null}
                       {boolEliminarRol ? (
                         <Button
-                          color="secondary"
+                          color="error"
                           style={style.submit.submitTabla}
                           onClick={() => mostrarDialogEliminar(rol)}
                           label="Eliminar"

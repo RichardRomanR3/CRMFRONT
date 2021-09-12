@@ -29,7 +29,7 @@ import PerfilPosibleCliente from './componentes/GestionDeClientes/PosiblesClient
 import ContactosPrincipal from './componentes/GestionDeClientes/Contactos/ContactosPrincipal';
 import NuevoContacto from './componentes/GestionDeClientes/Contactos/NuevoContacto';
 import PerfilContactos from './componentes/GestionDeClientes/Contactos/PerfilContactos';
-import BuzonDesugerencias from './componentes/GestionDeClientes/BuzonDeSugerencias/BuzonDeSugerencias';
+import ReporteSobreClientes from './componentes/GestionDeClientes/ReporteSobreClientes/ReporteSobreClientes';
 import Prohibido from './componentes/Genericos/Prohibido';
 import Difusiones from './componentes/Notas/Difusiones';
 import MisNotas from './componentes/Notas/MisNotas';
@@ -47,7 +47,7 @@ import NotasEnviadas from './componentes/Notas/NotasEnviadas';
 import NotificacionesMobile from './componentes/navegacion/bar/NotificacionesMobile';
 import Alerta from './componentes/navegacion/alerta';
 import Auditoria from './componentes/Seguridad/Auditoria';
-import PanelDeSugerencias from './componentes/GestionDeClientes/BuzonDeSugerencias/PanelDeSugerencias';
+import PanelReporteSobreClientes from './componentes/GestionDeClientes/ReporteSobreClientes/PanelReporteSobreClientes';
 import ConfiguracionAlerta from './componentes/Seguridad/ConfigurarAlerta/ConfiguracionAlerta';
 import ImportarExcel from './componentes/Seguridad/ImportarExcel';
 import GestionUsuario from './componentes/Seguridad/GestionUsuario';
@@ -188,8 +188,8 @@ function App() {
               />
               <RutaSegura
                 exact
-                path="/buzonSugerencias"
-                component={BuzonDesugerencias}
+                path="/reporteSobreClientes"
+                component={ReporteSobreClientes}
               />
               <RutaSegura exact path="/tareasPrincipal" component={MisTareas} />
               <RutaSegura exact path="/nuevaTarea" component={NuevaTarea} />
@@ -227,8 +227,8 @@ function App() {
               <RutaSegura exact path="/auditoria" component={Auditoria} />
               <RutaSegura
                 exact
-                path="/panelSugerencias"
-                component={PanelDeSugerencias}
+                path="/panelReporteSobreClientes"
+                component={PanelReporteSobreClientes}
               />
               <RutaSegura
                 exact

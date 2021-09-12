@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import {
   Container,
   Typography,
@@ -18,53 +18,58 @@ import {
   DialogActions,
   DialogContentText,
   Paper,
-} from '@material-ui/core';
-import style from '../Tools/Style.js';
-import RichTextEditor from 'react-rte';
-import moment from 'moment';
+} from "@material-ui/core";
+import style from "../Tools/Style.js";
+import RichTextEditor from "react-rte";
+import moment from "moment";
 import {
   editarTarea,
   obtenerDireccionesTareas,
   obtenerTelefonosTareas,
   obtenerTareasNotificacion,
-} from '../../actions/TareasAction';
-import { useStateValue } from '../../contexto/store';
-import { useHistory } from 'react-router-dom';
-import { RegistrarAccion } from '../../actions/AuditoriaAction.js';
+  nuevoComentarioDeTarea,
+} from "../../actions/TareasAction";
+import { useStateValue } from "../../contexto/store";
+import { useHistory } from "react-router-dom";
+import { RegistrarAccion } from "../../actions/AuditoriaAction.js";
+import ComentariosDeTareas from "./ComentariosDeTareas.js";
 export default function PerfilTarea(props) {
-
   const mounted = useRef(true);
   const history = useHistory();
   //eslint-disable-next-line
   const [{ openSnackBar, sesionUsuario }, dispatch] = useStateValue();
   const [openDialog, setOpenDialog] = useState(false);
+  const [comentario, setComentario] = useState("");
   const [cierre, setCierre] = useState({
-    MOTIVODECIERRE: '',
+    MOTIVODECIERRE: "",
   });
   const [estadoBotonTelefono, setEstadoBotonTelefono] = useState(true);
   const [Datatel, setDatatel] = useState([]);
   const [Datadir, setDatadir] = useState([]);
   const [estadoBotonDirecciones, setEstadoBotonDirecciones] = useState(true);
   const [tarea, setTarea] = useState({
-    TAREA_ID: '',
+    TAREA_ID: "",
     CODTAREA: 0,
-    USUARIOASIGNADO: '',
-    CLIENTE_ID: '',
-    FECHACREACION: '',
-    FECHAVTO: '',
-    TIPOTAREA: '',
-    NUMTAREA: '',
-    CLIENTE: '',
+    USUARIOASIGNADO: "",
+    CLIENTE_ID: "",
+    FECHACREACION: "",
+    FECHAVTO: "",
+    TIPOTAREA: "",
+    NUMTAREA: "",
+    CLIENTE: "",
   });
-  const [contenido, setContenido] = useState('');
+  const [contenido, setContenido] = useState("");
   const [editorValue, setEditorValue] = useState(
-    RichTextEditor.createValueFromString(contenido, 'html')
+    RichTextEditor.createValueFromString(contenido, "html")
   );
   const handleChange = (value) => {
     setEditorValue(value);
-    setContenido(value.toString('html'));
+    setContenido(value.toString("html"));
   };
-
+  const ingresarValoresMemoria = (e) => {
+    const{value}=e.target;
+    setComentario(value);
+  };
   const mostrarDirecciones = () => {
     if (estadoBotonDirecciones === false) {
       setEstadoBotonDirecciones(true);
@@ -87,14 +92,14 @@ export default function PerfilTarea(props) {
   const dialogHandleClose = () => {
     setOpenDialog(false);
     setCierre({
-      MOTIVODECIERRE: '',
+      MOTIVODECIERRE: "",
     });
   };
   //RR: FUNCION PARA BOTON CERRAR Y NUEVO
   const cerrarTareaYNueva = (e) => {
-    if (contenido !== '') {
+    if (contenido !== "") {
       e.preventDefault();
-      let fecha = moment().format().toString().substr(0, 16) + ':00';
+      let fecha = moment().format().toString().substr(0, 16) + ":00";
       const id = tarea.TAREA_ID;
       const objetoCierre = {
         COMPLETADO: fecha,
@@ -103,10 +108,10 @@ export default function PerfilTarea(props) {
       editarTarea(id, objetoCierre).then((response) => {
         if (response.status === 200) {
           dispatch({
-            type: 'OPEN_SNACKBAR',
+            type: "OPEN_SNACKBAR",
             openMensaje: {
               open: true,
-              mensaje: 'Se cerro exitosamente la Tarea',
+              mensaje: "Se cerro exitosamente la Tarea",
             },
           });
           let objetoNoti = {
@@ -120,40 +125,42 @@ export default function PerfilTarea(props) {
             obtenerTareasNotificacion(objetoNoti);
             dialogHandleClose();
             setTarea({
-              TAREA_ID: '',
+              TAREA_ID: "",
               CODTAREA: 0,
-              USUARIOASIGNADO: '',
+              USUARIOASIGNADO: "",
               CLIENTE_ID: tarea.CLIENTE_ID,
-              FECHACREACION: '',
-              FECHAVTO: '',
-              TIPOTAREA: '',
-              NUMTAREA: '',
-              CLIENTE: '',
+              FECHACREACION: "",
+              FECHAVTO: "",
+              TIPOTAREA: "",
+              NUMTAREA: "",
+              CLIENTE: "",
             });
             setCierre({
-              MOTIVODECIERRE: '',
+              MOTIVODECIERRE: "",
             });
-            setContenido('');
-            setEditorValue(RichTextEditor.createValueFromString(contenido, 'html'));
-            history.push({ pathname: '/nuevaTarea', state: tarea });
-          } 
+            setContenido("");
+            setEditorValue(
+              RichTextEditor.createValueFromString(contenido, "html")
+            );
+            history.push({ pathname: "/nuevaTarea", state: tarea });
+          }
         }
       });
     } else {
       dispatch({
-        type: 'OPEN_SNACKBAR',
+        type: "OPEN_SNACKBAR",
         openMensaje: {
           open: true,
-          mensaje: 'DEBE AGREGAR UN MOTIVO DE CIERRE',
+          mensaje: "DEBE AGREGAR UN MOTIVO DE CIERRE",
         },
       });
     }
   };
   //RRR: FUNCION PARA CERRAR TAREA
   const cerrarTarea = (e) => {
-    if (contenido !== '') {
+    if (contenido !== "") {
       e.preventDefault();
-      let fecha = moment().format().toString().substr(0, 16) + ':00';
+      let fecha = moment().format().toString().substr(0, 16) + ":00";
       const id = tarea.TAREA_ID;
       const objetoCierre = {
         COMPLETADO: fecha,
@@ -162,10 +169,10 @@ export default function PerfilTarea(props) {
       editarTarea(id, objetoCierre).then((response) => {
         if (response.status === 200) {
           dispatch({
-            type: 'OPEN_SNACKBAR',
+            type: "OPEN_SNACKBAR",
             openMensaje: {
               open: true,
-              mensaje: 'Se cerro exitosamente la Tarea',
+              mensaje: "Se cerro exitosamente la Tarea",
             },
           });
           let objetoNoti = {
@@ -174,26 +181,28 @@ export default function PerfilTarea(props) {
           };
           obtenerTareasNotificacion(objetoNoti);
           setTarea({
-            TAREA_ID: '',
+            TAREA_ID: "",
             CODTAREA: 0,
-            USUARIOASIGNADO: '',
-            CLIENTE_ID: '',
-            FECHACREACION: '',
-            FECHAVTO: '',
-            TIPOTAREA: '',
-            NUMTAREA: '',
-            CLIENTE: '',
+            USUARIOASIGNADO: "",
+            CLIENTE_ID: "",
+            FECHACREACION: "",
+            FECHAVTO: "",
+            TIPOTAREA: "",
+            NUMTAREA: "",
+            CLIENTE: "",
           });
           setCierre({
-            MOTIVODECIERRE: '',
+            MOTIVODECIERRE: "",
           });
-          setContenido('');
-          setEditorValue(RichTextEditor.createValueFromString(contenido, 'html'));
+          setContenido("");
+          setEditorValue(
+            RichTextEditor.createValueFromString(contenido, "html")
+          );
           let objetoAudi = {
             usuario: sesionUsuario.usuario.nombrecompleto,
-            accion: 'Modificacion',
-            panel: 'Gestion de Tareas',
-            tabla: 'TAREAS',
+            accion: "Modificacion",
+            panel: "Gestion de Tareas",
+            tabla: "TAREAS",
             filaafectada: props.location.state.TAREA_ID,
             UsuarioId: sesionUsuario.usuario.id,
           };
@@ -202,20 +211,20 @@ export default function PerfilTarea(props) {
           volver();
         } else {
           dispatch({
-            type: 'OPEN_SNACKBAR',
+            type: "OPEN_SNACKBAR",
             openMensaje: {
               open: true,
-              mensaje: 'Errores al intentar guardar ',
+              mensaje: "Errores al intentar guardar ",
             },
           });
         }
       });
     } else {
       dispatch({
-        type: 'OPEN_SNACKBAR',
+        type: "OPEN_SNACKBAR",
         openMensaje: {
           open: true,
-          mensaje: 'DEBE AGREGAR UN MOTIVO DE CIERRE ',
+          mensaje: "DEBE AGREGAR UN MOTIVO DE CIERRE ",
         },
       });
     }
@@ -223,6 +232,25 @@ export default function PerfilTarea(props) {
   const volver = () => {
     props.history.goBack();
   };
+  const agregarComentarioATarea =()=>{
+    const objetoComentario={
+      comentario:comentario,
+      TAREA_Id:tarea.TAREA_ID
+    }
+    nuevoComentarioDeTarea(objetoComentario).then((response)=>{
+      if(response.status ===200){
+        dispatch({
+          type: "OPEN_SNACKBAR",
+          openMensaje: {
+            open: true,
+            mensaje: "Se cerro exitosamente la Tarea",
+          },
+        });
+        setComentario('');
+      }
+    })
+  }
+
   useEffect(() => {
     if (mounted.current) {
       /*RRR: esta es una serie de verificaciones que debe hacer el modulo para 
@@ -248,16 +276,16 @@ export default function PerfilTarea(props) {
         CLIENTE:
           props.location.state.cliente === null
             ? props.location.state.posiblecliente.nombre +
-              ' ' +
+              " " +
               props.location.state.posiblecliente.apellido
             : props.location.state.cliente.nombre
             ? props.location.state.cliente.nombre +
-              ' ' +
+              " " +
               props.location.state.cliente.apellido
             : props.location.state.cliente,
         CODPRESUPUESTO: props.location.state.presupuesto
           ? props.location.state.presupuesto.codpresupuesto
-          : '',
+          : "",
       });
       /*RRR: verifica si la tarea ya esta cerrada para mostrar el motivo de cancelacion
       y ocultarlo en caso de que aun este pendiente de cierre*/
@@ -266,7 +294,7 @@ export default function PerfilTarea(props) {
           MOTIVODECIERRE: props.location.state.motivocancelacion,
         });
       } else {
-        console.log('NO CUMPLIO');
+        console.log("NO CUMPLIO");
       }
 
       obtenerTelefonosTareas(props.location.state.tareA_Id).then((response) => {
@@ -367,8 +395,8 @@ export default function PerfilTarea(props) {
               />
             </Grid>
           </Grid>
-          <br></br>
           <Grid item xs={12} md={12}>
+            <br />
             <Typography>Detalles:</Typography>
             <br />
             <TextareaAutosize
@@ -465,25 +493,53 @@ export default function PerfilTarea(props) {
               <Grid item xs={12} md={12}>
                 <Typography>Motivo de Cierre:</Typography>
                 <br />
-                 <RichTextEditor
-                placeholder='Escribir aqui...'
-                value={RichTextEditor.createValueFromString(cierre.MOTIVODECIERRE, 'html')}
-                id="body-text"
-                name="bodyText"
-                type="string"
-                rootStyle={{ width: '100%'}}
-                editorStyle={{height:200}}
-                readOnly={true}
-              />
+                <RichTextEditor
+                  placeholder="Escribir aqui..."
+                  value={RichTextEditor.createValueFromString(
+                    cierre.MOTIVODECIERRE,
+                    "html"
+                  )}
+                  id="body-text"
+                  name="bodyText"
+                  type="string"
+                  rootStyle={{ width: "100%" }}
+                  editorStyle={{ height: 200 }}
+                  readOnly={true}
+                />
               </Grid>
               <br />
             </Grid>
           ) : null}
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={12}>
+              <Grid item xs={12} md={12}>
+                <Typography>Comentarios:</Typography>
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <ComentariosDeTareas tareaId={tarea.TAREA_ID} comentario={comentario} />
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <TextField
+                name="comentario"
+                value={comentario}
+                fullWidth
+                onChange={ingresarValoresMemoria}
+                variant="outlined"
+                label="Agregar un comentario"
+              />
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Button color="primary" variant="contained" onClick={agregarComentarioATarea}>
+                Comentar
+              </Button>
+            </Grid>
+          </Grid>
           {/*RRR: se verifica si la persona que entra al perfil es el creador de la tarea
           puesto a que el unico que puede cerrar una tarea es el propietaro(asignado)
           y nadie mas
           */}
-          {props.location.state.TipoVisitante === 'Propietario' &&
+          {props.location.state.TipoVisitante === "Propietario" &&
           props.location.state.completado === null ? (
             <Grid container spacing={4} justify="center">
               <Grid item xs={12} md={6}>
@@ -510,7 +566,7 @@ export default function PerfilTarea(props) {
           ) : (
             <Grid container justify="center">
               <Grid item xs={12} md={12}>
-              <br />
+                <br />
                 <Button
                   onClick={volver}
                   variant="contained"
@@ -536,15 +592,15 @@ export default function PerfilTarea(props) {
               Debe agregar un motivo del cierre.
             </DialogContentText>
             <RichTextEditor
-                placeholder='Escribir aqui...'
-                value={editorValue}
-                onChange={handleChange}
-                id="body-text"
-                name="bodyText"
-                type="string"
-                rootStyle={{ width: 500}}
-                editorStyle={{height:200}}
-              />
+              placeholder="Escribir aqui..."
+              value={editorValue}
+              onChange={handleChange}
+              id="body-text"
+              name="bodyText"
+              type="string"
+              rootStyle={{ width: 500 }}
+              editorStyle={{ height: 200 }}
+            />
           </DialogContent>
           <DialogActions>
             <Button

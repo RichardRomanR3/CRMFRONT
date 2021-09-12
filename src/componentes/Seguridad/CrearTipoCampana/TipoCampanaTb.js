@@ -175,10 +175,10 @@ const TipoCampanaTb = (props) => {
                         onClick={() => seleccionarTipoCampana(tipocampana)}
                         label="Administrar"
                       >
-                        EDITAR
+                        Editar
                       </Button>
                       <Button
-                        color="secondary"
+                        color="error"
                         style={style.submit.submitTabla}
                         onClick={() => mostrarDialogEliminar(tipocampana)}
                         label="Eliminar"

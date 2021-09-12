@@ -34,7 +34,7 @@ export function MenuIzquierda({ classes }) {
   const [clientes, setClientes] = useState(false);
   const [posiblesClientes, setPosiblesClientes] = useState(false);
   const [contactos, setContactos] = useState(false);
-  const [buzonSugerencias, setBuzonSugerencias] = useState(false);
+  const [reporteSobreClientes, setreporteSobreClientes] = useState(false);
   const [misTareas, setMisTareas] = useState(false);
   const [asignarTareas, setAsignarTareas] = useState(false);
   const [panelTareas, setPanelTareas] = useState(false);
@@ -74,7 +74,7 @@ export function MenuIzquierda({ classes }) {
         evaluarPermiso(arrPermisos, '/posiblesClientesPrincipal')
       );
       setContactos(evaluarPermiso(arrPermisos, '/contactosPrincipal'));
-      setBuzonSugerencias(evaluarPermiso(arrPermisos, '/buzonSugerencias'));
+      setreporteSobreClientes(evaluarPermiso(arrPermisos, '/reporteSobreClientes'));
       setMisTareas(evaluarPermiso(arrPermisos, '/tareasPrincipal'));
       setAsignarTareas(evaluarPermiso(arrPermisos, '/asignarTareas'));
       setPanelTareas(evaluarPermiso(arrPermisos, '/panelTareas'));
@@ -322,11 +322,11 @@ export function MenuIzquierda({ classes }) {
                   <ListItemText primary="Contactos" />
                 </ListItem>
               ) : null}
-              {buzonSugerencias ? (
+              {reporteSobreClientes ? (
                 <ListItem
                   component={Link}
                   button
-                  to="/buzonSugerencias"
+                  to="/reporteSobreClientes"
                   className={classes.listItemText}
                 >
                   <i notranslate="true" className="material-icons">

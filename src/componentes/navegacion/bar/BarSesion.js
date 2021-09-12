@@ -221,7 +221,7 @@ const BarSesion = (props) => {
                     <Badge
                       badgeContent={difusionesDelDia}
                       //style={}
-                      color="secondary"
+                      color="error"
                     >
                       <RecordVoiceOver />
                     </Badge>
@@ -235,7 +235,7 @@ const BarSesion = (props) => {
                     <Badge
                       badgeContent={notasNoLeidas}
                       //style={}
-                      color="secondary"
+                      color="error"
                     >
                       <Email />
                     </Badge>
@@ -245,11 +245,11 @@ const BarSesion = (props) => {
 
               {tareasNoti ? (
                 <Link to="/tareasPrincipal" style={{ color: '#FFF' }}>
-                  <Tooltip title="Tareas">
+                  <Tooltip title="Tareas pendientes">
                     <Badge
                       badgeContent={tareasDelDia}
                       //style={}
-                      color="secondary"
+                      color="error"
                     >
                       <AssignmentLateIcon />
                     </Badge>

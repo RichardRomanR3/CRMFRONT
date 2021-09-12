@@ -13,13 +13,11 @@ const style = {
   },
   avatar: {
     margin: 5,
-    backgroundColor: '#1976d2',
     width: 100,
     height: 100,
   },
   avatarmenu: {
     margin: 5,
-    backgroundColor: '#1976d2',
     width: 100,
     height: 100,
     left: 50,

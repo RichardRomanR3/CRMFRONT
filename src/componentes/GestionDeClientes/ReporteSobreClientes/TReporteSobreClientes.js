@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TSugerencias(props) {
+export default function TReporteSobreClientes(props) {
   const classes = useStyles();
   //eslint-disable-next-line
   const [{ openSnackBar }, dispatch] = useStateValue();

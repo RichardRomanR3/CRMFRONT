@@ -169,7 +169,7 @@ const TiposTareasTb = (props) => {
                         onClick={() => modificarTipoTarea(tipotarea)}
                         label="Editar"
                       >
-                        EDITAR
+                        Editar
                       </Button>
                       <Button
                         color="secondary"

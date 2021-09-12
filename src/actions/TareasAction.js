@@ -7,6 +7,9 @@ export const obtenerTiposTareas = () => {
     });
   });
 };
+
+
+
 export const registrarTipoTarea = (tipoTarea) => {
   return new Promise((resolve, eject) => {
     HttpCliente.post('/TIPOSTAREAS', tipoTarea).then((response) => {
@@ -161,6 +164,26 @@ export const obtenerTareaPorId = (id) => {
 export const obtenerTareasNotificacion = (objeto) => {
   return new Promise((resolve, eject) => {
     HttpCliente.post('TAREAS/cuenta', objeto)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        resolve(error.response);
+      });
+  });
+};
+
+export const obtenerComentariosDeTarea = (tareaId) => {
+  return new Promise((resolve, eject) => {
+    HttpCliente.get('TAREAS/COMENTARIOSDETAREA/'+tareaId).then((response) => {
+      resolve(response);
+    });
+  });
+};
+
+export const nuevoComentarioDeTarea = (objeto) => {
+  return new Promise((resolve, eject) => {
+    HttpCliente.post('TAREAS/NUEVOCOMENTARIODETAREA', objeto)
       .then((response) => {
         resolve(response);
       })

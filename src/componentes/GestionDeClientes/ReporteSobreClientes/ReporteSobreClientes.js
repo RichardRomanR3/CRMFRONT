@@ -9,14 +9,14 @@ import {
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import style from '../../Tools/Style.js';
-import ModalClientes from '../../GestionDeClientes/ModalClientes.js';
+import ModalClientes from '../ModalClientes.js';
 import { obtenerClientes } from '../../../actions/ClientesAction.js';
 import { useStateValue } from '../../../contexto/store.js';
 import { nuevaSugerencia } from '../../../actions/SugerenciasAction.js';
 import { RegistrarAccion } from '../../../actions/AuditoriaAction.js';
 import RichTextEditor from 'react-rte';
 
-const BuzonDesugerencias = () => {
+const ReporteSobreClientes = () => {
   const mounted = useRef(true);
   const [Datacl, setDatacl] = useState([]);
   const [datosCargados, setDatosCargados] = useState(false);
@@ -195,4 +195,4 @@ const BuzonDesugerencias = () => {
     </Container>
   );
 };
-export default BuzonDesugerencias;
+export default ReporteSobreClientes;
