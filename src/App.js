@@ -54,7 +54,8 @@ import GestionUsuario from './componentes/Seguridad/GestionUsuario';
 import ReporteDeBugs from './componentes/Seguridad/ReporteDeBugs';
 import AsignarExcel from './componentes/Seguridad/AsignarExcel';
 import RevertirExcel from './componentes/Seguridad/RevertirExcel';
-import PanelPrincipalCorreosMasivos from './componentes/Marketing/CorreosMasivos/PanelPrincipalCorreosMasivos';
+import MetricasPrincipal from './componentes/Marketing/Metricas/MetricasPrincipal';
+import DasboardPrincipal from './componentes/Dashboard/DashBoardPrincipal';
 function App() {
   const [{ openSnackBar }, dispatch] = useStateValue();
   const [iniciaApp, setIniciaApp] = useState(false);
@@ -106,7 +107,7 @@ function App() {
                 component={RegistrarUsuario}
               />
               <RutaSegura exact path="/perfil" component={PerfilUsuario} />
-              <RutaSegura exact path="/" component={PerfilUsuario} />
+              <RutaSegura exact path="/" component={DasboardPrincipal} />
               <RutaSegura
                 exact
                 path="/clientesPrincipal"
@@ -254,8 +255,8 @@ function App() {
               />
               <RutaSegura
                 exact
-                path="/correosMasivos"
-                component={PanelPrincipalCorreosMasivos}
+                path="/metricas"
+                component={MetricasPrincipal}
               />
             </Switch>
           </Grid>

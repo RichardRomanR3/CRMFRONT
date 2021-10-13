@@ -108,7 +108,7 @@ export default function SpeedDialTooltipOpen() {
         setDifusionesDelDia(DIFUSIONESDELDIA.cuenta);
       });
       let objetoNoti = {
-        USUARIOASIGNADO: sesionUsuario.usuario.nombrecompleto,
+        USUARIOASIGNADO: sesionUsuario.usuario.id,
         UserName: sesionUsuario.usuario.userName,
       };
       /*RRR: en esta seccion se traen las notificaciones por primera vez 

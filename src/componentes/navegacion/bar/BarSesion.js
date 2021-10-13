@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import * as signalR from '@microsoft/signalr';
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import * as signalR from "@microsoft/signalr";
 //import style from '../../Tools/Style';
 import {
   Toolbar,
@@ -11,30 +11,30 @@ import {
   Drawer,
   Badge,
   Tooltip,
-} from '@material-ui/core';
-import { useStateValue } from '../../../contexto/store';
-import { MenuIzquierda } from './menuIzquierda';
-import { withRouter } from 'react-router-dom';
-import { MenuDerecha } from './menuDerecha';
-import AssignmentLateIcon from '@material-ui/icons/AssignmentLate';
-import Email from '@material-ui/icons/Email';
-import { RecordVoiceOver } from '@material-ui/icons';
-import { obtenerTareasNotificacion } from '../../../actions/TareasAction';
+} from "@material-ui/core";
+import { useStateValue } from "../../../contexto/store";
+import { MenuIzquierda } from "./menuIzquierda";
+import { withRouter } from "react-router-dom";
+import { MenuDerecha } from "./menuDerecha";
+import { AssignmentLate, Menu } from "@material-ui/icons";
+import Email from "@material-ui/icons/Email";
+import { RecordVoiceOver } from "@material-ui/icons";
+import { obtenerTareasNotificacion } from "../../../actions/TareasAction";
 import {
   contarDifusionesDelDia,
   obtenerNotasNoLeidas,
-} from '../../../actions/NotasAction';
+} from "../../../actions/NotasAction";
 const useStyles = makeStyles((theme) => ({
   seccionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
     },
   },
   seccionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
     },
   },
   grow: {
@@ -48,10 +48,10 @@ const useStyles = makeStyles((theme) => ({
     width: 250,
   },
   listItemText: {
-    fontSize: '14px',
+    fontSize: "14px",
     fontWeight: 600,
-    paddingLeft: '15px',
-    color: '#212121',
+    paddingLeft: "15px",
+    color: "#212121",
   },
 }));
 
@@ -94,38 +94,38 @@ const BarSesion = (props) => {
     setAbrirMenuDerecha(true);
   };
   const salirSesionApp = () => {
-    localStorage.removeItem('token_seguridad');
+    localStorage.removeItem("token_seguridad");
     dispatch({
-      type: 'SALIR_SESION',
+      type: "SALIR_SESION",
       nuevoUsuario: null,
       autenticado: false,
     });
-    props.history.push('/login');
+    props.history.push("/login");
   };
   useEffect(() => {
     if (mounted.current) {
       /*RRR: seccion SignalR para notificaciones a tiempo real*/
       const hubConnection = new signalR.HubConnectionBuilder()
         .withUrl(
-          'http://localhost:5000/chatHub?username=' +
+          "http://localhost:5000/chatHub?username=" +
             sesionUsuario.usuario.userName
         )
         .build();
       hubConnection
         .start()
-        .catch((err) => console.error('SignalR Connection Error: ', err));
+        .catch((err) => console.error("SignalR Connection Error: ", err));
 
-      hubConnection.on('CuentaTareas', (TAREAS) => {
+      hubConnection.on("CuentaTareas", (TAREAS) => {
         setTareasDelDia(TAREAS.cuenta);
       });
-      hubConnection.on('CuentaNotasNoLeidas', (NOTASNOLEIDAS) => {
+      hubConnection.on("CuentaNotasNoLeidas", (NOTASNOLEIDAS) => {
         setNotasNoLeidas(NOTASNOLEIDAS.cuenta);
       });
-      hubConnection.on('CuentaDifusionesDelDia', (DIFUSIONESDELDIA) => {
+      hubConnection.on("CuentaDifusionesDelDia", (DIFUSIONESDELDIA) => {
         setDifusionesDelDia(DIFUSIONESDELDIA.cuenta);
       });
       let objetoNoti = {
-        USUARIOASIGNADO: sesionUsuario.usuario.nombrecompleto,
+        USUARIOASIGNADO: sesionUsuario.usuario.id,
         UserName: sesionUsuario.usuario.userName,
       };
       /*RRR: en esta seccion se traen las notificaciones por primera vez 
@@ -163,10 +163,10 @@ const BarSesion = (props) => {
         }
       });
       const VerificarPermisos = (arrPermisos) => {
-        setNotificaciones(evaluarPermiso(arrPermisos, '/notificaciones'));
-        setNotasRecibidas(evaluarPermiso(arrPermisos, '/notasrecibidas'));
-        setDifusionesNoti(evaluarPermiso(arrPermisos, '/difusionesNoti'));
-        setTareasNoti(evaluarPermiso(arrPermisos, '/tareasNoti'));
+        setNotificaciones(evaluarPermiso(arrPermisos, "/notificaciones"));
+        setNotasRecibidas(evaluarPermiso(arrPermisos, "/notasrecibidas"));
+        setDifusionesNoti(evaluarPermiso(arrPermisos, "/difusionesNoti"));
+        setTareasNoti(evaluarPermiso(arrPermisos, "/tareasNoti"));
       };
       VerificarPermisos(
         sesionUsuario.usuario.pantallasUsuario.listaPantallasRol
@@ -204,7 +204,7 @@ const BarSesion = (props) => {
 
       <Toolbar>
         <IconButton color="inherit" onClick={abrirMenuIzquierdaAction}>
-          <i className="material-icons">menu</i>
+          <Menu />
         </IconButton>
 
         <Button color="inherit" component={Link} to="/">
@@ -216,7 +216,7 @@ const BarSesion = (props) => {
           {notificaciones ? (
             <div>
               {difusionesNoti ? (
-                <Link to="/difusiones" style={{ color: '#FFF' }}>
+                <Link to="/difusiones" style={{ color: "#FFF" }}>
                   <Tooltip title="Nuevas Difusiones">
                     <Badge
                       badgeContent={difusionesDelDia}
@@ -230,7 +230,7 @@ const BarSesion = (props) => {
               ) : null}
 
               {notasrecibidas ? (
-                <Link to="/misNotas" style={{ color: '#FFF' }}>
+                <Link to="/misNotas" style={{ color: "#FFF" }}>
                   <Tooltip title="Notas Nuevas">
                     <Badge
                       badgeContent={notasNoLeidas}
@@ -244,14 +244,14 @@ const BarSesion = (props) => {
               ) : null}
 
               {tareasNoti ? (
-                <Link to="/tareasPrincipal" style={{ color: '#FFF' }}>
+                <Link to="/tareasPrincipal" style={{ color: "#FFF" }}>
                   <Tooltip title="Tareas pendientes">
                     <Badge
                       badgeContent={tareasDelDia}
                       //style={}
                       color="error"
                     >
-                      <AssignmentLateIcon />
+                      <AssignmentLate />
                     </Badge>
                   </Tooltip>
                 </Link>
@@ -262,7 +262,7 @@ const BarSesion = (props) => {
             Salir
           </Button>
           <Button component={Link} to="/perfil" color="inherit">
-            {sesionUsuario ? sesionUsuario.usuario.nombrecompleto : ''}
+            {sesionUsuario ? sesionUsuario.usuario.nombrecompleto : ""}
           </Button>
           <Avatar src={sesionUsuario.usuario.imagenPerfil}></Avatar>
         </div>

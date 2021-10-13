@@ -9,8 +9,6 @@ function RutaSegura({ component: Component, ...rest }) {
   if (sesionUsuario) {
     const pantallasRol =
       sesionUsuario.usuario.pantallasUsuario.listaPantallasRol;
-    //FC: La siguiente linea filtra el array <pantallasRol> y si encuentra coincidencias con la <rutaActual>
-    //FC: se guardará en <arrRolPuedeVer>
     arrRolPuedeVer = pantallasRol.filter(
       (pantallazo) => pantallazo.path === rutaActual
     );

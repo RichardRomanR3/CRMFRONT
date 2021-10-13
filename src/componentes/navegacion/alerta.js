@@ -91,7 +91,7 @@ const Alerta = () => {
   useEffect(() => {
     if (sesionUsuario !== undefined && sesionUsuario.usuario !== null) {
       obtenerAlertaActual(sesionUsuario.usuario.id).then((response) => {
-        if (response.status === 200) {
+        if (response && response.status === 200) {
           setMInutosAlertaUsuario(response.data[0].minutosalerta);
         }
       });

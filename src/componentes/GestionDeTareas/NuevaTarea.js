@@ -239,11 +239,11 @@ export default function NuevaTarea(props) {
             (props.location.state !== undefined &&
               props.location.state.Modal === true)
               ? (objetoNoti = {
-                  USUARIOASIGNADO: objetoTarea.USUARIOASIGNADO,
+                  USUARIOASIGNADO: sesionUsuario.usuario.id,
                   UserName: userNameUsuarioAsignado,
                 })
               : (objetoNoti = {
-                  USUARIOASIGNADO: objetoTarea.USUARIOASIGNADO,
+                  USUARIOASIGNADO: sesionUsuario.usuario.id,
                   UserName: sesionUsuario.usuario.userName,
                 });
           }

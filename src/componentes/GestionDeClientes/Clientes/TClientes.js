@@ -1,20 +1,20 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import style from '../../Tools/Style';
-import Button from '@material-ui/core/Button';
-import { useHistory } from 'react-router-dom';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import style from "../../Tools/Style";
+import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
 // FERNADO COLUCCI/RICHARD ROMAN
 const useStyles = makeStyles({
   root: {
-    width: '100%',
+    width: "100%",
   },
   container: {
     maxHeight: 440,
@@ -24,36 +24,36 @@ const TClientes = (props) => {
   let columns = [];
   if (props.seleccionar !== undefined) {
     columns = [
-      { id: 'nombre', label: 'NOMBRE', minWidth: 100 },
-      { id: 'apellido', label: 'APELLIDO/RAZON SOCIAL', minWidth: 200 },
+      { id: "nombre", label: "NOMBRE", minWidth: 100 },
+      { id: "apellido", label: "APELLIDO/RAZON SOCIAL", minWidth: 200 },
       {
-        id: 'ci',
-        label: 'CI',
+        id: "ci",
+        label: "CI",
         minWidth: 40,
       },
       {
-        id: 'ruc',
-        label: 'RUC',
+        id: "ruc",
+        label: "RUC",
         minWidth: 60,
       },
     ];
   } else {
     columns = [
-      { id: 'codcliente', label: 'CODIGO', minWidth: 50 },
-      { id: 'numcliente', label: 'NUMCLIENTE', minWidth: 50 },
-      { id: 'nombre', label: 'NOMBRE', minWidth: 100 },
-      { id: 'apellido', label: 'APELLIDO/RAZON SOCIAL', minWidth: 200 },
+      { id: "codcliente", label: "CODIGO", minWidth: 50 },
+      { id: "numcliente", label: "NUMCLIENTE", minWidth: 50 },
+      { id: "nombre", label: "NOMBRE", minWidth: 100 },
+      { id: "apellido", label: "APELLIDO/RAZON SOCIAL", minWidth: 200 },
       {
-        id: 'ci',
-        label: 'CI',
+        id: "ci",
+        label: "CI",
         minWidth: 40,
       },
       {
-        id: 'ruc',
-        label: 'RUC',
+        id: "ruc",
+        label: "RUC",
         minWidth: 60,
       },
-      { id: 'acciones', label: 'ACCIONES', minWidth: 80 },
+      { id: "acciones", label: "ACCIONES", minWidth: 80 },
     ];
   }
   const classes = useStyles();
@@ -63,20 +63,20 @@ const TClientes = (props) => {
   const termc = props.termc;
   const history = useHistory();
   const abrirPerfilCliente = (cliente) => {
-    history.push({ pathname: '/clientePerfil', state: cliente });
+    history.push({ pathname: "/clientePerfil", state: cliente });
   };
 
   function searchingTermc(termc) {
     return function (x) {
-      let nombre = '';
+      let nombre = "";
       if (x.nombre === null || x.nombre === undefined) {
-        nombre = '';
+        nombre = "";
       } else {
         nombre = x.nombre;
       }
-      let apellido = '';
+      let apellido = "";
       if (x.apellido === null || x.apellido === undefined) {
-        apellido = '';
+        apellido = "";
       } else {
         apellido = x.apellido;
       }
@@ -86,15 +86,15 @@ const TClientes = (props) => {
       } else {
         codcliente = x.codcliente;
       }
-      let ci = '';
+      let ci = "";
       if (x.ci === null || x.ci === undefined) {
-        ci = '';
+        ci = "";
       } else {
         ci = x.ci;
       }
-      let ruc = '';
+      let ruc = "";
       if (x.ruc === null || x.ruc === undefined) {
-        ruc = '';
+        ruc = "";
       } else {
         ruc = x.ruc;
       }
@@ -116,6 +116,7 @@ const TClientes = (props) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  console.log("KEEE ", termc);
   if (props.seleccionar === undefined) {
     return (
       <Paper className={classes.root}>
@@ -135,29 +136,52 @@ const TClientes = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
-                .filter(searchingTermc(termc))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((cliente) => (
-                  <TableRow key={cliente.clientE_Id}>
-                    <TableCell align="left">{cliente.codcliente}</TableCell>
-                    <TableCell align="left">{cliente.numcliente}</TableCell>
-                    <TableCell align="left">{cliente.nombre}</TableCell>
-                    <TableCell align="left">{cliente.apellido}</TableCell>
-                    <TableCell align="left">{cliente.ci}</TableCell>
-                    <TableCell align="left">{cliente.ruc}</TableCell>
-                    <TableCell align="left">
-                      <Button
-                        color="primary"
-                        style={style.submit.submitTabla}
-                        onClick={() => abrirPerfilCliente(cliente)}
-                        label="Administrar"
-                      >
-                        PERFIL
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
+              {termc
+                ? rows
+                    .filter(searchingTermc(termc))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((cliente) => (
+                      <TableRow key={cliente.clientE_Id}>
+                        <TableCell align="left">{cliente.codcliente}</TableCell>
+                        <TableCell align="left">{cliente.numcliente}</TableCell>
+                        <TableCell align="left">{cliente.nombre}</TableCell>
+                        <TableCell align="left">{cliente.apellido}</TableCell>
+                        <TableCell align="left">{cliente.ci}</TableCell>
+                        <TableCell align="left">{cliente.ruc}</TableCell>
+                        <TableCell align="left">
+                          <Button
+                            color="primary"
+                            style={style.submit.submitTabla}
+                            onClick={() => abrirPerfilCliente(cliente)}
+                            label="Administrar"
+                          >
+                            PERFIL
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                : rows
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((cliente) => (
+                      <TableRow key={cliente.clientE_Id}>
+                        <TableCell align="left">{cliente.codcliente}</TableCell>
+                        <TableCell align="left">{cliente.numcliente}</TableCell>
+                        <TableCell align="left">{cliente.nombre}</TableCell>
+                        <TableCell align="left">{cliente.apellido}</TableCell>
+                        <TableCell align="left">{cliente.ci}</TableCell>
+                        <TableCell align="left">{cliente.ruc}</TableCell>
+                        <TableCell align="left">
+                          <Button
+                            color="primary"
+                            style={style.submit.submitTabla}
+                            onClick={() => abrirPerfilCliente(cliente)}
+                            label="Administrar"
+                          >
+                            PERFIL
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
             </TableBody>
           </Table>
         </TableContainer>
@@ -191,34 +215,63 @@ const TClientes = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
-                .filter(searchingTermc(termc))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.ci}
-                      onClick={() => {
-                        props.seleccionar(row);
-                        props.setTermc('');
-                      }}
-                    >
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number'
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
+              {termc
+                ? rows
+                    .filter(searchingTermc(termc))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.ci}
+                          onClick={() => {
+                            props.seleccionar(row);
+                            props.setTermc("");
+                          }}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === "number"
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })
+                : rows
+
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.ci}
+                          onClick={() => {
+                            props.seleccionar(row);
+                            props.setTermc("");
+                          }}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === "number"
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
             </TableBody>
           </Table>
         </TableContainer>

@@ -172,6 +172,17 @@ export const obtenerTareasNotificacion = (objeto) => {
       });
   });
 };
+export const obtenerTareasCerradas = (objeto) => {
+  return new Promise((resolve, eject) => {
+    HttpCliente.post('TAREAS/cuentaCerradasPropias', objeto)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        resolve(error.response);
+      });
+  });
+};
 
 export const obtenerComentariosDeTarea = (tareaId) => {
   return new Promise((resolve, eject) => {

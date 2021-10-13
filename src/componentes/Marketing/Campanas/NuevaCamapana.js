@@ -18,6 +18,30 @@ import {
   registrarCampana,
 } from '../../../actions/CampanasAction.js';
 import { RegistrarAccion } from '../../../actions/AuditoriaAction.js';
+import NumberFormat from 'react-number-format';
+const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
+  const { onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={ref}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      decimalSeparator={','}
+      thousandSeparator={'.'}
+      isNumericString
+      prefix="₲ "
+    />
+  );
+});
+
 export default function NuevaCampana(props) {
   const mounted = useRef(true);
   const [campana, setCampana] = useState({
@@ -222,6 +246,9 @@ export default function NuevaCampana(props) {
                 onChange={ingresarValoresMemoria}
                 variant="outlined"
                 label="Presupuesto"
+                InputProps={{
+                  inputComponent: NumberFormatCustom,
+                }}
               />
             </Grid>
             <Grid item xs={12} md={6}>

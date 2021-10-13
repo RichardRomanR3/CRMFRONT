@@ -5,14 +5,37 @@ import {
   Divider,
   Toolbar,
   Avatar,
-} from '@material-ui/core';
-import style from '../../Tools/Style';
-import { Link } from 'react-router-dom';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import React, { useState, useEffect } from 'react';
-import { useStateValue } from '../../../contexto/store';
+} from "@material-ui/core";
+import style from "../../Tools/Style";
+import { Link } from "react-router-dom";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import React, { useState, useEffect } from "react";
+import { useStateValue } from "../../../contexto/store";
+import {
+  Radio,
+  AccountBox,
+  AccountCircle,
+  Alarm,
+  Archive,
+  Assessment,
+  AssignmentInd,
+  BugReport,
+  Contacts,
+  HowToReg,
+  Inbox,
+  People,
+  PersonAdd,
+  PersonAddDisabled,
+  Public,
+  RecordVoiceOver,
+  RemoveRedEye,
+  ScreenShare,
+  SmsFailed,
+  Undo,
+  Dashboard,
+} from "@material-ui/icons";
 export function MenuIzquierda({ classes }) {
   const [{ sesionUsuario }] = useStateValue();
   //FERNANDO COLUCCI
@@ -51,47 +74,51 @@ export function MenuIzquierda({ classes }) {
   const [asignarExcel, setAsignarExcel] = useState(false);
   const [reporteBug, setReporteBug] = useState(false);
   const [revertirExcel, setRevertirExcel] = useState(false);
-  const [correosMasivos, setCorreosMasivos] = useState(false);
+  const [metricas, setMetricas] = useState(false);
+  const [dashBoard,setDashboard]=useState(false);
 
   useEffect(() => {
     const VerificarPermisos = (arrPermisos) => {
       //CATEGORIA
-      setCuenta(evaluarPermiso(arrPermisos, '/cuenta'));
-      setGestionTareas(evaluarPermiso(arrPermisos, '/gestionTareas'));
-      setNotas(evaluarPermiso(arrPermisos, '/notas'));
-      setConfiguracion(evaluarPermiso(arrPermisos, '/configuracion'));
-      setGestionClientes(evaluarPermiso(arrPermisos, '/gestionClientes'));
-      setMarketing(evaluarPermiso(arrPermisos, '/marketing'));
+      setCuenta(evaluarPermiso(arrPermisos, "/cuenta"));
+      setGestionTareas(evaluarPermiso(arrPermisos, "/gestionTareas"));
+      setNotas(evaluarPermiso(arrPermisos, "/notas"));
+      setConfiguracion(evaluarPermiso(arrPermisos, "/configuracion"));
+      setGestionClientes(evaluarPermiso(arrPermisos, "/gestionClientes"));
+      setMarketing(evaluarPermiso(arrPermisos, "/marketing"));
       //SUBCATEGORIA
-      setPerfil(evaluarPermiso(arrPermisos, '/perfil'));
-      setRegistrarUsuario(evaluarPermiso(arrPermisos, '/registrar'));
-      setDifusiones(evaluarPermiso(arrPermisos, '/difusiones'));
-      setMisNotas(evaluarPermiso(arrPermisos, '/misNotas'));
-      setNuevaNota(evaluarPermiso(arrPermisos, '/nuevaNota'));
-      setNuevaDifusion(evaluarPermiso(arrPermisos, '/nuevaDifusion'));
-      setClientes(evaluarPermiso(arrPermisos, '/clientesPrincipal'));
+      setPerfil(evaluarPermiso(arrPermisos, "/perfil"));
+      setRegistrarUsuario(evaluarPermiso(arrPermisos, "/registrar"));
+      setDifusiones(evaluarPermiso(arrPermisos, "/difusiones"));
+      setMisNotas(evaluarPermiso(arrPermisos, "/misNotas"));
+      setNuevaNota(evaluarPermiso(arrPermisos, "/nuevaNota"));
+      setNuevaDifusion(evaluarPermiso(arrPermisos, "/nuevaDifusion"));
+      setClientes(evaluarPermiso(arrPermisos, "/clientesPrincipal"));
       setPosiblesClientes(
-        evaluarPermiso(arrPermisos, '/posiblesClientesPrincipal')
+        evaluarPermiso(arrPermisos, "/posiblesClientesPrincipal")
       );
-      setContactos(evaluarPermiso(arrPermisos, '/contactosPrincipal'));
-      setreporteSobreClientes(evaluarPermiso(arrPermisos, '/reporteSobreClientes'));
-      setMisTareas(evaluarPermiso(arrPermisos, '/tareasPrincipal'));
-      setAsignarTareas(evaluarPermiso(arrPermisos, '/asignarTareas'));
-      setPanelTareas(evaluarPermiso(arrPermisos, '/panelTareas'));
-      setCampanas(evaluarPermiso(arrPermisos, '/campanasPrincipal'));
-      setCrearTiposCampanas(evaluarPermiso(arrPermisos, '/tiposcampanas'));
-      setCrearTiposTareas(evaluarPermiso(arrPermisos, '/tipostareas'));
-      setAsignarRolesUsuarios(evaluarPermiso(arrPermisos, '/usuariosRoles'));
-      setAdministrarRoles(evaluarPermiso(arrPermisos, '/rol'));
-      setNotasEnviadas(evaluarPermiso(arrPermisos, '/notasEnviadas'));
-      setAuditoria(evaluarPermiso(arrPermisos, '/auditoria'));
-      setPanelSugerencias(evaluarPermiso(arrPermisos, '/panelSugerencias'));
-      setConfigurarAlerta(evaluarPermiso(arrPermisos, '/configurarAlerta'));
-      setImportarExcel(evaluarPermiso(arrPermisos, '/importarExcel'));
-      setAsignarExcel(evaluarPermiso(arrPermisos, '/asignarExcel'));
-      setReporteBug(evaluarPermiso(arrPermisos, '/reportarBug'));
-      setRevertirExcel(evaluarPermiso(arrPermisos, '/revertirExcel'));
-      setCorreosMasivos(evaluarPermiso(arrPermisos, '/correosMasivos'));
+      setContactos(evaluarPermiso(arrPermisos, "/contactosPrincipal"));
+      setreporteSobreClientes(
+        evaluarPermiso(arrPermisos, "/reporteSobreClientes")
+      );
+      setMisTareas(evaluarPermiso(arrPermisos, "/tareasPrincipal"));
+      setAsignarTareas(evaluarPermiso(arrPermisos, "/asignarTareas"));
+      setPanelTareas(evaluarPermiso(arrPermisos, "/panelTareas"));
+      setCampanas(evaluarPermiso(arrPermisos, "/campanasPrincipal"));
+      setCrearTiposCampanas(evaluarPermiso(arrPermisos, "/tiposcampanas"));
+      setCrearTiposTareas(evaluarPermiso(arrPermisos, "/tipostareas"));
+      setAsignarRolesUsuarios(evaluarPermiso(arrPermisos, "/usuariosRoles"));
+      setAdministrarRoles(evaluarPermiso(arrPermisos, "/rol"));
+      setNotasEnviadas(evaluarPermiso(arrPermisos, "/notasEnviadas"));
+      setAuditoria(evaluarPermiso(arrPermisos, "/auditoria"));
+      setPanelSugerencias(evaluarPermiso(arrPermisos, "/panelSugerencias"));
+      setConfigurarAlerta(evaluarPermiso(arrPermisos, "/configurarAlerta"));
+      setImportarExcel(evaluarPermiso(arrPermisos, "/importarExcel"));
+      setAsignarExcel(evaluarPermiso(arrPermisos, "/asignarExcel"));
+      setReporteBug(evaluarPermiso(arrPermisos, "/reportarBug"));
+      setRevertirExcel(evaluarPermiso(arrPermisos, "/revertirExcel"));
+      setMetricas(evaluarPermiso(arrPermisos, "/metricas"));
+      setDashboard(evaluarPermiso(arrPermisos, "/"));
     };
     VerificarPermisos(sesionUsuario.usuario.pantallasUsuario.listaPantallasRol);
   }, [sesionUsuario]);
@@ -120,7 +147,6 @@ export function MenuIzquierda({ classes }) {
     setOpenMarketing(!openMarketing);
   };
 
-
   const evaluarPermiso = (arrayrevisar, ruta) => {
     var boolEvaluacion = false;
 
@@ -145,7 +171,7 @@ export function MenuIzquierda({ classes }) {
         </ListItem>
         {cuenta ? (
           <ListItem onClick={handleOpenCuenta}>
-            <i className="material-icons">account_circle</i>
+            <AccountCircle />
             <ListItemText
               classes={{ primary: classes.listItemText }}
               primary="Cuenta"
@@ -162,12 +188,11 @@ export function MenuIzquierda({ classes }) {
                 to="/perfil"
                 className={classes.listItemText}
               >
-                <i notranslate="true" className="material-icons">
-                  account_box
-                </i>
+                <AccountBox />
                 <ListItemText primary="Perfil" />
               </ListItem>
             ) : null}
+             
             {registrarUsuario ? (
               <ListItem
                 component={Link}
@@ -175,16 +200,28 @@ export function MenuIzquierda({ classes }) {
                 to="/registrar"
                 className={classes.listItemText}
               >
-                <i notranslate="true" className="material-icons">
-                  person_add
-                </i>
+                <PersonAdd />
                 <ListItemText primary="Registrar Usuario" />
               </ListItem>
             ) : null}
           </List>
         </Collapse>
       </List>
+    
       {cuenta ? <Divider /> : null}
+      {dashBoard ? (
+          <ListItem component={Link}
+          button 
+          to='/'
+          className={classes.listItemText}
+          >
+            <Dashboard />
+            <ListItemText
+              primary="Dashboard"
+            />
+          </ListItem>
+        ) : null}
+        {dashBoard ? <Divider /> : null}
       {notas ? (
         <List>
           <ListItem onClick={handleOpenNotas}>
@@ -204,9 +241,7 @@ export function MenuIzquierda({ classes }) {
                   to="/difusiones"
                   className={classes.listItemText}
                 >
-                  <i notranslate="true" className="material-icons">
-                    record_voice_over
-                  </i>
+                  <RecordVoiceOver />
                   <ListItemText primary="Difusiones" />
                 </ListItem>
               ) : null}
@@ -217,9 +252,7 @@ export function MenuIzquierda({ classes }) {
                   to="/misNotas"
                   className={classes.listItemText}
                 >
-                  <i notranslate="true" className="material-icons">
-                    inbox
-                  </i>
+                  <Inbox />
                   <ListItemText primary="Mis Notas" />
                 </ListItem>
               ) : null}
@@ -233,6 +266,7 @@ export function MenuIzquierda({ classes }) {
                   <i notranslate="true" className="material-icons">
                     connect_without_contact
                   </i>
+
                   <ListItemText primary="Nueva Nota" />
                 </ListItem>
               ) : null}
@@ -246,6 +280,7 @@ export function MenuIzquierda({ classes }) {
                   <i notranslate="true" className="material-icons">
                     forward_to_inbox
                   </i>
+
                   <ListItemText primary="Notas Enviadas" />
                 </ListItem>
               ) : null}
@@ -256,9 +291,7 @@ export function MenuIzquierda({ classes }) {
                   to="/nuevaDifusion"
                   className={classes.listItemText}
                 >
-                  <i notranslate="true" className="material-icons">
-                    sms_failed
-                  </i>
+                  <SmsFailed />
                   <ListItemText primary="Nueva Difusion" />
                 </ListItem>
               ) : null}
@@ -270,9 +303,7 @@ export function MenuIzquierda({ classes }) {
       {gestionClientes ? (
         <List>
           <ListItem onClick={handleOpenGestionClientes}>
-            <i notranslate="true" className="material-icons">
-              people
-            </i>
+            <People />
             <ListItemText
               classes={{ primary: classes.listItemText }}
               primary="Gestion de Clientes"
@@ -289,9 +320,7 @@ export function MenuIzquierda({ classes }) {
                     to="/clientesPrincipal"
                     className={classes.listItemText}
                   >
-                    <i notranslate="true" className="material-icons">
-                      how_to_reg
-                    </i>
+                    <HowToReg />
                     <ListItemText primary="Clientes" />
                   </ListItem>
                 ) : null}
@@ -316,9 +345,7 @@ export function MenuIzquierda({ classes }) {
                   to="/contactosPrincipal"
                   className={classes.listItemText}
                 >
-                  <i notranslate="true" className="material-icons">
-                    contacts
-                  </i>
+                  <Contacts />
                   <ListItemText primary="Contactos" />
                 </ListItem>
               ) : null}
@@ -329,9 +356,7 @@ export function MenuIzquierda({ classes }) {
                   to="/reporteSobreClientes"
                   className={classes.listItemText}
                 >
-                  <i notranslate="true" className="material-icons">
-                    archive
-                  </i>
+                  <Archive />
                   <ListItemText primary="Reporte sobre Cliente" />
                 </ListItem>
               ) : null}
@@ -388,9 +413,7 @@ export function MenuIzquierda({ classes }) {
                     to="/asignarTareas"
                     className={classes.listItemText}
                   >
-                    <i notranslate="true" className="material-icons">
-                      assignment_ind
-                    </i>
+                    <AssignmentInd />
                     <ListItemText primary="Asignar Tareas" />
                   </ListItem>
                 ) : null}
@@ -401,9 +424,7 @@ export function MenuIzquierda({ classes }) {
                     to="/panelTareas"
                     className={classes.listItemText}
                   >
-                    <i notranslate="true" className="material-icons">
-                      screen_share
-                    </i>
+                    <ScreenShare />
                     <ListItemText primary="Panel de Tareas" />
                   </ListItem>
                 ) : null}
@@ -417,9 +438,7 @@ export function MenuIzquierda({ classes }) {
       {marketing ? (
         <List>
           <ListItem onClick={handleOpenMarketing}>
-            <i notranslate="true" className="material-icons">
-              public
-            </i>
+            <Public />
             <ListItemText
               classes={{ primary: classes.listItemText }}
               primary="Marketing"
@@ -443,15 +462,15 @@ export function MenuIzquierda({ classes }) {
               ) : null}
             </List>
             <List component="div" disablePadding>
-              {correosMasivos ? (
+              {metricas ? (
                 <ListItem
                   component={Link}
                   button
-                  to="/correosMasivos"
+                  to="/metricas"
                   className={classes.listItemText}
                 >
-                  <span class="material-icons">alternate_email</span>
-                  <ListItemText primary="Correos Masivos" />
+                  <Assessment />
+                  <ListItemText primary="Metricas" />
                 </ListItem>
               ) : null}
             </List>
@@ -480,9 +499,7 @@ export function MenuIzquierda({ classes }) {
                   to="/tiposcampanas"
                   className={classes.listItemText}
                 >
-                  <i notranslate="true" className="material-icons">
-                    radio
-                  </i>
+                  <Radio />
                   <ListItemText primary="Crear Tipos de Campañas" />
                 </ListItem>
               ) : null}
@@ -506,9 +523,7 @@ export function MenuIzquierda({ classes }) {
                   to="/usuariosRoles"
                   className={classes.listItemText}
                 >
-                  <i notranslate="true" className="material-icons">
-                    person_add_disabled
-                  </i>
+                  <PersonAddDisabled />
                   <ListItemText primary="Asignar Roles a Usuarios" />
                 </ListItem>
               ) : null}
@@ -532,9 +547,7 @@ export function MenuIzquierda({ classes }) {
                   to="/auditoria"
                   className={classes.listItemText}
                 >
-                  <i notranslate="true" className="material-icons">
-                    remove_red_eye
-                  </i>
+                  <RemoveRedEye />
                   <ListItemText primary="Auditoria" />
                 </ListItem>
               ) : null}
@@ -545,9 +558,7 @@ export function MenuIzquierda({ classes }) {
                   to="/configurarAlerta"
                   className={classes.listItemText}
                 >
-                  <i notranslate="true" className="material-icons">
-                    alarm
-                  </i>
+                  <Alarm />
                   <ListItemText primary="Configuracion de Alertas" />
                 </ListItem>
               ) : null}
@@ -576,7 +587,7 @@ export function MenuIzquierda({ classes }) {
                   </i>
                   <ListItemText primary="Importar Excel (Para otro Usuario)" />
                 </ListItem>
-              ) : null}{' '}
+              ) : null}{" "}
               {revertirExcel ? (
                 <ListItem
                   component={Link}
@@ -584,12 +595,10 @@ export function MenuIzquierda({ classes }) {
                   to="/revertirExcel"
                   className={classes.listItemText}
                 >
-                  <i notranslate="true" className="material-icons">
-                    undo
-                  </i>
+                  <Undo />
                   <ListItemText primary="Revertir Importaciones" />
                 </ListItem>
-              ) : null}{' '}
+              ) : null}{" "}
               {reporteBug ? (
                 <ListItem
                   component={Link}
@@ -597,9 +606,7 @@ export function MenuIzquierda({ classes }) {
                   to="/reportarBug"
                   className={classes.listItemText}
                 >
-                  <i notranslate="true" className="material-icons">
-                    bug_report
-                  </i>
+                  <BugReport />
                   <ListItemText primary="Reporte de Bugs" />
                 </ListItem>
               ) : null}

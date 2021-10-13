@@ -14,7 +14,7 @@ import {
 } from '../../actions/UsuariosAction';
 import { withRouter } from 'react-router-dom';
 import { useStateValue } from '../../contexto/store';
-import Image from '../../assets/laptop.jpg';
+import Image from '../../assets/3900644.jpg';
 import Dialog from '@material-ui/core/Dialog';
 import { Typography } from '@material-ui/core';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -26,7 +26,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit">FOLLOW-UP CRM</Link> {new Date().getFullYear()}
+      <Link color="inherit">FOLLOW-UP</Link> {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
@@ -223,7 +223,7 @@ const Login = (props) => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Correo electrónico"
               name="Email"
               autoComplete="email"
               autoFocus
@@ -236,7 +236,7 @@ const Login = (props) => {
               required
               fullWidth
               name="Password"
-              label="Password"
+              label="Contraseña"
               type="password"
               id="password"
               autoComplete="current-password"

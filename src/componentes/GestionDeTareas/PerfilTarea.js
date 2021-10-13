@@ -28,6 +28,7 @@ import {
   obtenerTelefonosTareas,
   obtenerTareasNotificacion,
   nuevoComentarioDeTarea,
+  obtenerTareasCerradas,
 } from "../../actions/TareasAction";
 import { useStateValue } from "../../contexto/store";
 import { useHistory } from "react-router-dom";
@@ -115,7 +116,7 @@ export default function PerfilTarea(props) {
             },
           });
           let objetoNoti = {
-            USUARIOASIGNADO: sesionUsuario.usuario.nombrecompleto,
+            USUARIOASIGNADO: sesionUsuario.usuario.id,
             UserName: sesionUsuario.usuario.userName,
           };
           if (
@@ -123,6 +124,7 @@ export default function PerfilTarea(props) {
             props.location.state.presupuesto === undefined
           ) {
             obtenerTareasNotificacion(objetoNoti);
+            obtenerTareasCerradas(objetoNoti);
             dialogHandleClose();
             setTarea({
               TAREA_ID: "",
@@ -176,7 +178,7 @@ export default function PerfilTarea(props) {
             },
           });
           let objetoNoti = {
-            USUARIOASIGNADO: sesionUsuario.usuario.nombrecompleto,
+            USUARIOASIGNADO: sesionUsuario.usuario.id,
             UserName: sesionUsuario.usuario.userName,
           };
           obtenerTareasNotificacion(objetoNoti);

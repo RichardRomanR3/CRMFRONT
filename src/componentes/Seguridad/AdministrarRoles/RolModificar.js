@@ -154,6 +154,7 @@ const RolModificar = (props) => {
       });
       obtenerUsuarioActual(dispatch);
       props.history.goBack();
+      //window.location.reload();
     }
   };
 
