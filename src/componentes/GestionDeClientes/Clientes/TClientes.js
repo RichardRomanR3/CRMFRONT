@@ -173,9 +173,7 @@ const TClientes = (props) => {
                         <TableCell align="left">
                           <Button
                             color="primary"
-                            style={style.submit.submitTabla}
                             onClick={() => abrirPerfilCliente(cliente)}
-                            label="Administrar"
                           >
                             PERFIL
                           </Button>

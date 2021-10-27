@@ -6,6 +6,7 @@ import {
   TextField,
   Button,
   Avatar,
+  Tooltip,
 } from '@material-ui/core';
 import style from '../Tools/Style';
 import { actualizarUsuario } from '../../actions/UsuariosAction';
@@ -155,6 +156,22 @@ const PerfilUsuario = () => {
             </Grid>
 
             <Grid item xs={12} md={6}>
+            <Tooltip
+                enterTouchDelay={10}
+                title={
+                  <div>
+                    LA CONTRASEÑA DEBE TENER:
+                    <br />
+                    -Al menos una letra en Minuscula
+                    <br />
+                    -Al menos una letra en Mayuscula
+                    <br />
+                    -Al menos un numero
+                    <br />
+                    -Al menos un caracter especial (/,*,-,etc)
+                  </div>
+                }
+              >
               <TextField
                 name="password"
                 value={usuario.password}
@@ -165,6 +182,7 @@ const PerfilUsuario = () => {
                 label="Contraseña"
                 autoComplete="current-password"
               />
+              </Tooltip>
               <br></br>
               <br></br>
               <br></br>

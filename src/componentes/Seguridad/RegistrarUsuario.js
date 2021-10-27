@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect,useRef } from 'react';
 import {
   Container,
   Typography,
@@ -6,14 +6,25 @@ import {
   TextField,
   Button,
   Tooltip,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
 } from '@material-ui/core';
 import style from '../Tools/Style';
 import { registrarUsuario } from '../../actions/UsuariosAction';
 import { useStateValue } from '../../contexto/store';
 import { clavefuerte } from './ClaveFuerte';
+import { ObtenerListaRoles } from '../../actions/RolesAction';
 const RegistrarUsuario = () => {
+  const mounted =useRef(true);
   //eslint-disable-next-line
   const [{ sesionUsuario }, dispatch] = useStateValue();
+  const [nuevoRol, setNuevoRol] = useState('');
+  const selectRolhandleChange = (event) => {
+    setNuevoRol(event.target.value);
+  };
+  const [DataRoles, setDataRoles] = useState([]);
   const [usuario, setUsuario] = useState({
     UserName: '',
     NOMBRECOMPLETO: '',
@@ -37,7 +48,8 @@ const RegistrarUsuario = () => {
       usuario.Email === '' ||
       usuario.Password === '' ||
       usuario.ConfirmarPassword === '' ||
-      usuario.numerotelefono === ''
+      usuario.numerotelefono === '' ||
+      nuevoRol === ''
     ) {
       dispatch({
         type: 'OPEN_SNACKBAR',
@@ -65,6 +77,7 @@ const RegistrarUsuario = () => {
             EMAIL: usuario.Email,
             Password: usuario.Password,
             NUMEROTELEFONO: usuario.numerotelefono,
+            RolNombre:nuevoRol
           };
           registrarUsuario(objetoReg).then((response) => {
             if (response.status === 500) {
@@ -115,6 +128,21 @@ const RegistrarUsuario = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (mounted.current) {
+      ObtenerListaRoles().then((response) => {
+        if (response.status === 200) {
+          setDataRoles(response.data);
+        } else {
+          console.log('erro en axios');
+        }
+      });
+    }
+    return function cleanup() {
+      mounted.current = false;
+    };
+  }, []);
 
   return (
     <Container component="main" maxWidth="md" justify="center">
@@ -215,7 +243,26 @@ const RegistrarUsuario = () => {
             </Grid>
           </Grid>
           <br></br>
+          <FormControl variant="outlined" style={style.Select.rol}>
+                <InputLabel style={style.Selectrol}>Rol</InputLabel>
+                <Select
+                  value={nuevoRol}
+                  onChange={selectRolhandleChange}
+                  label="Rol"
+                >
+                  <MenuItem value="">
+                    <em>Ninguno</em>
+                  </MenuItem>
+                  {DataRoles.map((rol) => (
+                    <MenuItem key={rol.id} value={rol.name}>
+                      {rol.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
           <br></br>
+          <br></br>
+
           <Grid container justify="center">
             <Grid item xs={12} md={6}>
               <Button

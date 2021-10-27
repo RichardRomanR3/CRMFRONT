@@ -103,7 +103,7 @@ function App() {
               <Route exact path="/prohibido" component={Prohibido} />
               <RutaSegura
                 exact
-                path="/registrar"
+                path="/registrarUsuario"
                 component={RegistrarUsuario}
               />
               <RutaSegura exact path="/perfil" component={PerfilUsuario} />

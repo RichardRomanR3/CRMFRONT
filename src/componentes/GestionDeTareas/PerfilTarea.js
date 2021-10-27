@@ -241,13 +241,6 @@ export default function PerfilTarea(props) {
     }
     nuevoComentarioDeTarea(objetoComentario).then((response)=>{
       if(response.status ===200){
-        dispatch({
-          type: "OPEN_SNACKBAR",
-          openMensaje: {
-            open: true,
-            mensaje: "Se cerro exitosamente la Tarea",
-          },
-        });
         setComentario('');
       }
     })

@@ -524,7 +524,7 @@ export function MenuIzquierda({ classes }) {
                   className={classes.listItemText}
                 >
                   <PersonAddDisabled />
-                  <ListItemText primary="Asignar Roles a Usuarios" />
+                  <ListItemText primary="Gestión de usuarios" />
                 </ListItem>
               ) : null}
               {administrarRoles ? (

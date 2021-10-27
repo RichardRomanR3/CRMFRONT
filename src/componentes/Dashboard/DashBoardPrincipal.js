@@ -4,11 +4,15 @@ import CalendarioPersonal from "./CalendarioPersonal";
 import CantidadTareasCerradasUsuarioCard from "./CantidadTareasCerradasUsuarioCard";
 import CantidadTareasPendientesUsuarioCard from "./CantidadTareasPendientesUsuarioCard";
 import { useStateValue } from "../../contexto/store";
+import GraficoTareas from "./GraficoTareas";
+import GraficoCampanas from "./GraficoCampanas";
 
 export default function DasboardPrincipal() {
   const [tareasPendientesUsuDia, setTareasPendientesUsuDia] = useState(false);
   const [tareasCerradasUsuDia, setTareasCerradasUsuDia] = useState(false);
   const [calendario, setCalendario] = useState(false);
+  const [graficoTareas, setGraficoTareas] = useState(false);
+  const [graficoCampanas, setGraficoCampanas] = useState(false);
   const [{ sesionUsuario }] = useStateValue();
   const evaluarPermiso = (arrayrevisar, ruta) => {
     var boolEvaluacion = false;
@@ -30,6 +34,8 @@ export default function DasboardPrincipal() {
         evaluarPermiso(arrPermisos, "/tareasPendientesUsuDia")
       );
       setCalendario(evaluarPermiso(arrPermisos, "/calendario"));
+      setGraficoTareas(evaluarPermiso(arrPermisos, "/graficoTareas"));
+      setGraficoCampanas(evaluarPermiso(arrPermisos, "/graficoCampanas"));
     };
     VerificarPermisos(sesionUsuario.usuario.pantallasUsuario.listaPantallasRol);
   }, [sesionUsuario]);
@@ -66,7 +72,7 @@ export default function DasboardPrincipal() {
             container
             spacing={2}
             direction="column"
-           style={{marginTop:'10px'}}
+            style={{ marginTop: "10px" }}
           >
             <Grid item xs={12} sm={12} xl={12} lg={12} md={12}>
               <Typography variant="h4" align="center">
@@ -76,6 +82,36 @@ export default function DasboardPrincipal() {
             <Grid item xs={12} sm={12} xl={12} lg={12} md={12}>
               <CalendarioPersonal />
             </Grid>
+          </Grid>
+        ) : null}
+        {graficoTareas ? (
+          <Grid container    spacing={2}
+          direction="column"
+          style={{ marginTop: "10px" }}>
+          <Grid item xs={12} sm={12} xl={12} lg={12} md={12}>
+          <Typography variant="h4" align="center">
+            Grafico de tareas
+          </Typography>
+        </Grid>
+          <Grid item lg={12} md={12} xs={12} sm={12} xl={12}>
+            <GraficoTareas />
+          </Grid>
+          </Grid>
+        ) : null}
+        {graficoCampanas ? (
+          <Grid container spacing={2}
+          direction="column"
+          alignContent='center'
+          justifyContent='center'
+          style={{ marginTop: "10px" }}>
+          <Grid item xs={12} sm={12} xl={12} lg={12} md={12}>
+          <Typography variant="h4" align="center">
+            Grafico de campañas
+          </Typography>
+        </Grid>
+          <Grid item lg={12} md={12} xs={12} sm={12} xl={12}>
+            <GraficoCampanas />
+          </Grid>
           </Grid>
         ) : null}
       </Grid>

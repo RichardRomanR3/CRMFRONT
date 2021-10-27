@@ -25,6 +25,31 @@ import {
 } from '../../../actions/ClientesAction';
 import { obtenerCampanas } from '../../../actions/CampanasAction';
 import { RegistrarAccion } from '../../../actions/AuditoriaAction';
+import DigitoVerificador from '../DigitoVerificador';
+import NumberFormat from 'react-number-format';
+
+const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
+  const { onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={ref}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      decimalSeparator={','}
+      thousandSeparator={'.'}
+      isNumericString
+    />
+  );
+});
+
 // FERNADO COLUCCI
 const ClienteNuevo = (props) => {
   const [barrioCiu, setBarrioCiu] = useState('');
@@ -37,6 +62,8 @@ const ClienteNuevo = (props) => {
   const [redes, setRedes] = useState([]);
   //eslint-disable-next-line
   const [{ sesionUsuario }, dispatch] = useStateValue();
+  const [buttonDisabled,setButtonDisabled]=useState(false);
+  const [rucDisabled,setRucDisabled]=useState(false);
   const [cliente, setCliente] = useState({
     NOMBRE: '',
     APELLIDO: '',
@@ -414,6 +441,21 @@ const ClienteNuevo = (props) => {
     });
   }, [barrioCiu, sesionUsuario]);
 
+  const calcularRuc=()=>{
+    if(cliente.CI && cliente.CI.length<6){
+      setCliente((anterior)=>({...anterior,RUC:"NUMERO DE CI NO VALIDO"}));
+      setButtonDisabled(true);
+      setRucDisabled(true);
+    }
+   else if(cliente.CI){
+      setCliente((anterior)=>({...anterior,RUC:cliente.CI+"-"+DigitoVerificador(cliente.CI)}));
+      setButtonDisabled(false);
+      setRucDisabled(true);
+    }else{
+      setCliente((anterior)=>({...anterior,RUC:""}));
+      setRucDisabled(false);
+    }
+  }
   return (
     <Container component="main" maxWidth="md" justify="center">
       <div style={style.paper}>
@@ -456,6 +498,10 @@ const ClienteNuevo = (props) => {
                 onChange={ingresarValoresMemoria}
                 variant="outlined"
                 label="Nro. Cedula"
+                onBlur={calcularRuc}
+                InputProps={{
+                  inputComponent: NumberFormatCustom,
+                }}
               />
             </Grid>
 
@@ -467,6 +513,7 @@ const ClienteNuevo = (props) => {
                 onChange={ingresarValoresMemoria}
                 variant="outlined"
                 label="RUC"
+                disabled={rucDisabled}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -770,7 +817,7 @@ const ClienteNuevo = (props) => {
                     );
                   }}
                   variant="outlined"
-                  label="Nombre de usuario en la Red Social"
+                  label="Nombre de usuario o Nick"
                   style={style.textDet}
                 />
                 <TextField
@@ -814,6 +861,7 @@ const ClienteNuevo = (props) => {
                 color="primary"
                 onClick={registrarClienteBoton}
                 style={style.submit}
+                disabled={buttonDisabled}
               >
                 Registrar
               </Button>

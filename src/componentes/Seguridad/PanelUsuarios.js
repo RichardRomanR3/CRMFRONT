@@ -1,18 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import TUsuarios from './TUsuarios';
-import { Container, Grid, Typography, TextField } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
-import style from '../Tools/Style';
-import { obtenerListaUsuarios } from '../../actions/UsuariosAction';
-import SearchIcon from '@material-ui/icons/Search';
+import React, { useState, useEffect } from "react";
+import TUsuarios from "./TUsuarios";
+import {
+  Container,
+  Grid,
+  Typography,
+  TextField,
+  Button,
+} from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import style from "../Tools/Style";
+import { obtenerListaUsuarios } from "../../actions/UsuariosAction";
+import SearchIcon from "@material-ui/icons/Search";
 const PanelUsuarios = () => {
-  const [termp, setTermp] = useState('');
+  const [termp, setTermp] = useState("");
   const [dataUsu, setDataUsu] = useState([]);
   const [mostrarTabla, setMostrarTabla] = useState(false);
   const history = useHistory();
   const seleccionarUsuario = (usuario) => {
-    history.push({ pathname: '/gestionRolesUsuarios', state: usuario });
+    history.push({ pathname: "/gestionRolesUsuarios", state: usuario });
   };
+  const goToRegistrarUsuario=()=>{
+    history.push('/registrarUsuario')
+  }
   useEffect(() => {
     setMostrarTabla(true);
     obtenerListaUsuarios().then((response) => {
@@ -28,6 +37,13 @@ const PanelUsuarios = () => {
       <Typography align="center" component="h1" variant="h6">
         Usuarios
       </Typography>
+      <Grid container direction="row">
+        <Grid item>
+          <Button onClick={goToRegistrarUsuario}variant="contained" color="primary">
+            Registrar usuario
+          </Button>
+        </Grid>
+      </Grid>
       <Grid container spacing={1} alignItems="flex-end">
         <Grid item>
           <SearchIcon />
