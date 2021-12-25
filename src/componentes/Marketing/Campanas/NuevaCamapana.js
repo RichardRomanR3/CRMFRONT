@@ -327,7 +327,7 @@ export default function NuevaCampana(props) {
             <Grid item xs={12} md={6}>
               <Button
                 variant="contained"
-                color="primary"
+                color="secondary"
                 onClick={volver}
                 style={style.submit}
               >

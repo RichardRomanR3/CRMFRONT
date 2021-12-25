@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import style from '../../Tools/Style';
-import SearchIcon from '@material-ui/icons/Search';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { obtenerTiposTareas, eliminarTp } from '../../../actions/TareasAction';
+import React, { useState, useEffect } from "react";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import style from "../../Tools/Style";
+import SearchIcon from "@material-ui/icons/Search";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { obtenerTiposTareas, eliminarTp } from "../../../actions/TareasAction";
 import {
   CircularProgress,
   Dialog,
@@ -21,16 +21,16 @@ import {
   DialogContentText,
   DialogTitle,
   Typography,
-} from '@material-ui/core';
-import { useStateValue } from '../../../contexto/store';
+} from "@material-ui/core";
+import { useStateValue } from "../../../contexto/store";
 
 const TiposTareasTb = (props) => {
   //eslint-disable-next-line
   const [{ openSnackar }, dispatch] = useStateValue();
   const [Datar, setDatar] = useState([]);
-  const [term, setTerm] = useState('');
-  const [tipoTareaElimId, setTipoTareaElimId] = useState('');
-  const [tipoTareaElimNombre, setTipoTareaElimNombre] = useState('');
+  const [term, setTerm] = useState("");
+  const [tipoTareaElimId, setTipoTareaElimId] = useState("");
+  const [tipoTareaElimNombre, setTipoTareaElimNombre] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
   const [datosCargados, setDatosCargados] = useState(false);
 
@@ -43,7 +43,7 @@ const TiposTareasTb = (props) => {
         setDatosCargados(true);
       })
       .catch((error) => {
-        console.log('Ocurrio un error al obtener los tipos tareas', error);
+        console.log("Ocurrio un error al obtener los tipos tareas", error);
       });
   }, []);
 
@@ -59,14 +59,14 @@ const TiposTareasTb = (props) => {
   //RRR: FUNCION ONCLICK(SELECCIONAR TIPO TAREA) DE TABLA
   const modificarTipoTarea = (tipotarea) => {
     props.history.push({
-      pathname: '/tipostareas/modificar',
+      pathname: "/tipostareas/modificar",
       state: tipotarea,
     });
   };
 
   //RRR: FUNCION ONCLICK DE BOTON NUEVO
   const nuevoTipoTarea = () => {
-    props.history.push('/tipostareas/nuevo');
+    props.history.push("/tipostareas/nuevo");
   };
 
   //RRR: FUNCION PARA ELIMINAR TIPO DE TAREA
@@ -75,19 +75,19 @@ const TiposTareasTb = (props) => {
       if (response.status === 200) {
         window.location.reload();
         dispatch({
-          type: 'OPEN_SNACKBAR',
+          type: "OPEN_SNACKBAR",
           openMensaje: {
             open: true,
-            mensaje: 'Se Elimino exitosamente el Tipo de Tarea',
+            mensaje: "Se Elimino exitosamente el Tipo de Tarea",
           },
         });
       } else {
         dispatch({
-          type: 'OPEN_SNACKBAR',
+          type: "OPEN_SNACKBAR",
           openMensaje: {
             open: true,
             mensaje:
-              'El tipo de Tarea ya esta siendo utilizado no se puede eliminar ',
+              "El tipo de Tarea ya esta siendo utilizado no se puede eliminar ",
           },
         });
       }
@@ -128,7 +128,7 @@ const TiposTareasTb = (props) => {
         <Grid item xs={12} md={6}>
           <br />
 
-          <Grid container spacing={1} alignItems="flex-end">
+          <Grid container  alignItems="flex-end" direction='row'>
             <Grid item>
               <SearchIcon />
             </Grid>
@@ -165,17 +165,17 @@ const TiposTareasTb = (props) => {
                     <TableCell align="center">
                       <Button
                         color="primary"
-                        style={style.submit.submitTabla}
+                        style={{ backgroundColor: "blue", marginRight: "5px" }}
                         onClick={() => modificarTipoTarea(tipotarea)}
-                        label="Editar"
+                        variant="contained"
                       >
-                        Editar
+                        Modificar
                       </Button>
                       <Button
-                        color="secondary"
-                        style={style.submit.submitTabla}
+                        variant="contained"
+                        color="primary"
+                        style={{ backgroundColor: "red" }}
                         onClick={() => mostrarDialogEliminar(tipotarea)}
-                        label="Eliminar"
                       >
                         Eliminar
                       </Button>
@@ -211,6 +211,7 @@ const TiposTareasTb = (props) => {
               variant="contained"
               onClick={dialogHandleCloseX}
               color="secondary"
+              style={{ backgroundColor: "blue" }}
             >
               Cancelar
             </Button>
@@ -218,6 +219,7 @@ const TiposTareasTb = (props) => {
               variant="contained"
               onClick={eliminarTipoTarea}
               color="primary"
+              style={{ backgroundColor: "green" }}
             >
               Aceptar
             </Button>

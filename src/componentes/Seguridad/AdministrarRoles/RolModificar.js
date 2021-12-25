@@ -271,7 +271,7 @@ const RolModificar = (props) => {
           <Grid item xs={4} md={4}>
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               component={Link}
               to="/rol"
               style={style.submit}

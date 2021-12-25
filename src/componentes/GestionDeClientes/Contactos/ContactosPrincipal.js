@@ -52,11 +52,11 @@ const ContactosPrincipal = (props) => {
       </Grid>
       <Grid item xs={12} md={6}>
         <br />
-        <Grid container spacing={1} alignItems="flex-end">
+        <Grid container alignItems="flex-end" direction='row'>
           <Grid item>
             <SearchIcon />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item>
             <TextField
               multiline
               name="term"

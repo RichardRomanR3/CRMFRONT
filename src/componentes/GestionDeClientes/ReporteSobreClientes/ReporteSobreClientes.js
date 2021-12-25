@@ -129,7 +129,7 @@ const ReporteSobreClientes = () => {
     };
   }, []);
   return (
-    <Container component="main" maxWidth="md" justify="center">
+    <Container component="main" justify="center">
       <div style={style.paper}>
         <br></br>
         <br></br>
@@ -156,6 +156,7 @@ const ReporteSobreClientes = () => {
               onChange={ingresarValoresMemoria}
               variant="outlined"
               label="CLIENTE"
+              disabled
             />
             <br />
             <br />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { List, ListItem, Avatar, ListItemText } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { PowerSettingsNew } from '@material-ui/icons';
 
 export const MenuDerecha = ({ classes, usuario, salirSesion }) => (
   <div className={classes.list}>
@@ -12,8 +13,8 @@ export const MenuDerecha = ({ classes, usuario, salirSesion }) => (
           primary={usuario ? usuario.nombrecompleto : ''}
         />
       </ListItem>
-      <ListItem button onClick={salirSesion}>
-        <i className="material-icons">power_settings_new</i>
+      <ListItem button onClick={salirSesion} className={classes.listItemText}>
+        <PowerSettingsNew/>
         <ListItemText
           classes={{ primary: classes.listItemText }}
           primary="Salir"

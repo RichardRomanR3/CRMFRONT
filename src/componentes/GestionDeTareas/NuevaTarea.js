@@ -829,7 +829,7 @@ export default function NuevaTarea(props) {
               <Button
                 onClick={volver}
                 variant="contained"
-                color="primary"
+                color="secondary"
                 style={style.submit}
               >
                 Cancelar

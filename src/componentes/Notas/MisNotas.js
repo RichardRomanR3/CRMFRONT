@@ -33,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     paddingBottom: 50,
+    borderRadius:10,
+    marginTop:'10px'
   },
   list: {
     marginBottom: theme.spacing(2),
@@ -310,7 +312,7 @@ const MisNotas = () => {
     <Container>
       <Paper square className={classes.paper}>
         <MuiPickersUtilsProvider locale={esLocale} utils={DateFnsUtils}>
-          <Grid container>
+          <Grid container direction='row' justifyContent='center' alignContent='center'>
             <KeyboardDatePicker
               disableToolbar
               variant="inline"

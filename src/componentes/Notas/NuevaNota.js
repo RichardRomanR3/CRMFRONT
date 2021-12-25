@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     paddingBottom: 50,
+    borderRadius:10
   },
   list: {
     marginBottom: theme.spacing(2),
@@ -175,9 +176,8 @@ const NuevaNota = () => {
   return (
     <Container component="main" maxWidth="md" justify="center">
       <br />
-      <br />
       <Paper square className={classes.paper}>
-        <Grid container spacing={1} alignItems="flex-end">
+        <Grid container alignItems="flex-end" direction='row' >
           <Grid item>
             <SearchIcon />
           </Grid>

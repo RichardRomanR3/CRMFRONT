@@ -58,6 +58,7 @@ const PanelUsuarios = () => {
           />
         </Grid>
       </Grid>
+      <br/>
       <TUsuarios
         rows={dataUsu}
         seleccionar={seleccionarUsuario}

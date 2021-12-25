@@ -46,13 +46,17 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     width: 250,
+    backgroundColor:'#283593'
   },
   listItemText: {
     fontSize: "14px",
     fontWeight: 600,
     paddingLeft: "15px",
-    color: "#212121",
+    color: "#fafafa",
   },
+  paper:{
+flexDirection:"row"
+  }
 }));
 
 const BarSesion = (props) => {
@@ -182,8 +186,9 @@ const BarSesion = (props) => {
         open={abrirMenuIzquierda}
         onClose={cerrarMenuIzquierda}
         anchor="left"
+        classes={{ paper: classes.paper }}
       >
-        <div className={classes.list} onKeyDown={cerrarMenuIzquierda}>
+        <div className={classes.list} onKeyDown={cerrarMenuIzquierda} style={{backgroundColor:'#283593'}}>
           <MenuIzquierda classes={classes} />
         </div>
       </Drawer>
@@ -192,8 +197,9 @@ const BarSesion = (props) => {
         open={abrirMenuDerecha}
         onClose={cerrarMenuDerecha}
         anchor="right"
+        classes={{ paper: classes.paper }}
       >
-        <div className={classes.list} onClick={cerrarMenuDerecha}>
+        <div className={classes.list} onClick={cerrarMenuDerecha}  style={{backgroundColor:'#283593'}}>
           <MenuDerecha
             classes={classes}
             salirSesion={salirSesionApp}

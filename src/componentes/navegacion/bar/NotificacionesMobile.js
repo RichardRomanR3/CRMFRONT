@@ -44,7 +44,7 @@ export default function SpeedDialTooltipOpen() {
     {
       icon: (
         <Link to="/tareasPrincipal" style={{ color: '#757575' }}>
-          <Badge badgeContent={tareasDelDia} color="secondary">
+          <Badge badgeContent={tareasDelDia} color="error">
             <AssignmentLateIcon />
           </Badge>
         </Link>
@@ -55,7 +55,7 @@ export default function SpeedDialTooltipOpen() {
     {
       icon: (
         <Link to="/misNotas" style={{ color: '#757575' }}>
-          <Badge badgeContent={notasNoLeidas} color="secondary">
+          <Badge badgeContent={notasNoLeidas} color="error">
             <Email />
           </Badge>
         </Link>
@@ -66,7 +66,7 @@ export default function SpeedDialTooltipOpen() {
     {
       icon: (
         <Link to="/difusiones" style={{ color: '#757575' }}>
-          <Badge badgeContent={difusionesDelDia} color="secondary">
+          <Badge badgeContent={difusionesDelDia} color="error">
             <RecordVoiceOver />
           </Badge>
         </Link>

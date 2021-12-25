@@ -36,6 +36,8 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     paddingBottom: 50,
+    borderRadius:10,
+    marginTop:'10px'
   },
   list: {
     marginBottom: theme.spacing(2),
@@ -200,6 +202,7 @@ const NuevaDifusion = () => {
       <br />
       <Grid item xs={12} md={12}>
         <TextField
+        multiline
           fullWidth
           name="Texto"
           value={mensaje.Texto}
@@ -208,9 +211,9 @@ const NuevaDifusion = () => {
           label="Texto"
         />
       </Grid>
-      <Grid item xs={3} md={3}>
+      <Grid item xs={3} md={3} style={{marginTop:'5px'}}>
         <Button color="primary" variant="contained" onClick={Enviar}>
-          Enviar
+          Difundir
         </Button>
       </Grid>
       <Dialog

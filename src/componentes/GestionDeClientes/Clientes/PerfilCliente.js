@@ -1290,7 +1290,7 @@ const PerfilCliente = (props) => {
             <Grid item xs={12} md={6}>
               <Button
                 variant="contained"
-                color="primary"
+                color="secondary"
                 onClick={cerrarClientesPerfil}
                 style={style.submit}
               >

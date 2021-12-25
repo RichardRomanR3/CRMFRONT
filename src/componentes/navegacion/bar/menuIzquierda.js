@@ -35,6 +35,7 @@ import {
   SmsFailed,
   Undo,
   Dashboard,
+  Note,
 } from "@material-ui/icons";
 export function MenuIzquierda({ classes }) {
   const [{ sesionUsuario }] = useStateValue();
@@ -68,7 +69,7 @@ export function MenuIzquierda({ classes }) {
   const [administrarRoles, setAdministrarRoles] = useState(false);
   const [notasEnviadas, setNotasEnviadas] = useState(false);
   const [auditoria, setAuditoria] = useState(false);
-  const [panelSugerencias, setPanelSugerencias] = useState(false);
+  const [panelReporteSobreClientes, setPanelReporteSobreClientes] = useState(false);
   const [configurarAlerta, setConfigurarAlerta] = useState(false);
   const [importarExcel, setImportarExcel] = useState(false);
   const [asignarExcel, setAsignarExcel] = useState(false);
@@ -111,7 +112,7 @@ export function MenuIzquierda({ classes }) {
       setAdministrarRoles(evaluarPermiso(arrPermisos, "/rol"));
       setNotasEnviadas(evaluarPermiso(arrPermisos, "/notasEnviadas"));
       setAuditoria(evaluarPermiso(arrPermisos, "/auditoria"));
-      setPanelSugerencias(evaluarPermiso(arrPermisos, "/panelSugerencias"));
+      setPanelReporteSobreClientes(evaluarPermiso(arrPermisos, "/panelReporteSobreCliente"));
       setConfigurarAlerta(evaluarPermiso(arrPermisos, "/configurarAlerta"));
       setImportarExcel(evaluarPermiso(arrPermisos, "/importarExcel"));
       setAsignarExcel(evaluarPermiso(arrPermisos, "/asignarExcel"));
@@ -170,7 +171,9 @@ export function MenuIzquierda({ classes }) {
           ></Avatar>
         </ListItem>
         {cuenta ? (
-          <ListItem onClick={handleOpenCuenta}>
+          <ListItem onClick={handleOpenCuenta}
+          className={classes.listItemText}
+          >
             <AccountCircle />
             <ListItemText
               classes={{ primary: classes.listItemText }}
@@ -188,7 +191,7 @@ export function MenuIzquierda({ classes }) {
                 to="/perfil"
                 className={classes.listItemText}
               >
-                <AccountBox />
+                <AccountBox color="inherit" />
                 <ListItemText primary="Perfil" />
               </ListItem>
             ) : null}
@@ -208,7 +211,7 @@ export function MenuIzquierda({ classes }) {
         </Collapse>
       </List>
     
-      {cuenta ? <Divider /> : null}
+      {cuenta ? <Divider style={{backgroundColor:'white'}} /> : null}
       {dashBoard ? (
           <ListItem component={Link}
           button 
@@ -220,12 +223,13 @@ export function MenuIzquierda({ classes }) {
               primary="Dashboard"
             />
           </ListItem>
+     
         ) : null}
-        {dashBoard ? <Divider /> : null}
+        {dashBoard ? <Divider style={{backgroundColor:'white'}} /> : null}
       {notas ? (
         <List>
-          <ListItem onClick={handleOpenNotas}>
-            <i className="material-icons">note</i>
+          <ListItem onClick={handleOpenNotas} className={classes.listItemText}>
+            <Note/>
             <ListItemText
               classes={{ primary: classes.listItemText }}
               primary="Notas"
@@ -266,7 +270,6 @@ export function MenuIzquierda({ classes }) {
                   <i notranslate="true" className="material-icons">
                     connect_without_contact
                   </i>
-
                   <ListItemText primary="Nueva Nota" />
                 </ListItem>
               ) : null}
@@ -280,7 +283,6 @@ export function MenuIzquierda({ classes }) {
                   <i notranslate="true" className="material-icons">
                     forward_to_inbox
                   </i>
-
                   <ListItemText primary="Notas Enviadas" />
                 </ListItem>
               ) : null}
@@ -299,10 +301,10 @@ export function MenuIzquierda({ classes }) {
           </Collapse>
         </List>
       ) : null}
-      {notas ? <Divider /> : null}
+      {notas ? <Divider style={{backgroundColor:'white'}} /> : null}
       {gestionClientes ? (
         <List>
-          <ListItem onClick={handleOpenGestionClientes}>
+          <ListItem onClick={handleOpenGestionClientes} className={classes.listItemText}>
             <People />
             <ListItemText
               classes={{ primary: classes.listItemText }}
@@ -334,6 +336,7 @@ export function MenuIzquierda({ classes }) {
                     <i notranslate="true" className="material-icons">
                       person_add_alt_1
                     </i>
+
                     <ListItemText primary="Posibles Clientes" />
                   </ListItem>
                 ) : null}
@@ -360,11 +363,11 @@ export function MenuIzquierda({ classes }) {
                   <ListItemText primary="Reporte sobre Cliente" />
                 </ListItem>
               ) : null}
-              {panelSugerencias ? (
+              {panelReporteSobreClientes ? (
                 <ListItem
                   component={Link}
                   button
-                  to="/panelSugerencias"
+                  to="/panelReporteSobreCliente"
                   className={classes.listItemText}
                 >
                   <i notranslate="true" className="material-icons">
@@ -377,10 +380,10 @@ export function MenuIzquierda({ classes }) {
           </Collapse>
         </List>
       ) : null}
-      {gestionClientes ? <Divider /> : null}
+      {gestionClientes ? <Divider  style={{backgroundColor:'white'}}/> : null}
       {gestionTareas ? (
         <List>
-          <ListItem onClick={handleOpenGestionTareas}>
+          <ListItem onClick={handleOpenGestionTareas} className={classes.listItemText}>
             <i notranslate="true" className="material-icons">
               pending_actions
             </i>
@@ -434,10 +437,10 @@ export function MenuIzquierda({ classes }) {
         </List>
       ) : null}
 
-      {gestionTareas ? <Divider /> : null}
+      {gestionTareas ? <Divider style={{backgroundColor:'white'}} /> : null}
       {marketing ? (
         <List>
-          <ListItem onClick={handleOpenMarketing}>
+          <ListItem onClick={handleOpenMarketing} className={classes.listItemText}>
             <Public />
             <ListItemText
               classes={{ primary: classes.listItemText }}
@@ -477,10 +480,10 @@ export function MenuIzquierda({ classes }) {
           </Collapse>
         </List>
       ) : null}
-      {marketing ? <Divider /> : null}
+      {marketing ? <Divider style={{backgroundColor:'white'}}/> : null}
       {configuracion ? (
         <List>
-          <ListItem onClick={handleOpenArchivo}>
+          <ListItem onClick={handleOpenArchivo} className={classes.listItemText}>
             <i notranslate="true" className="material-icons">
               construction
             </i>

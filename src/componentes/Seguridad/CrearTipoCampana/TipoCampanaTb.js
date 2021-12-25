@@ -132,7 +132,7 @@ const TipoCampanaTb = (props) => {
         <Grid item xs={12} md={6}>
           <br />
 
-          <Grid container spacing={1} alignItems="flex-end">
+          <Grid container alignItems="flex-end" direction='row'>
             <Grid item>
               <SearchIcon />
             </Grid>
@@ -171,15 +171,17 @@ const TipoCampanaTb = (props) => {
                     <TableCell align="center">
                       <Button
                         color="primary"
-                        style={style.submit.submitTabla}
+                        style={{backgroundColor:'blue',marginRight:'5px'}}
                         onClick={() => seleccionarTipoCampana(tipocampana)}
                         label="Administrar"
+                        variant="contained"
                       >
-                        Editar
+                        Modificar
                       </Button>
                       <Button
-                        color="error"
-                        style={style.submit.submitTabla}
+                        color="primary"
+                        style={{backgroundColor:"red"}}
+                        variant="contained"
                         onClick={() => mostrarDialogEliminar(tipocampana)}
                         label="Eliminar"
                       >
@@ -216,7 +218,8 @@ const TipoCampanaTb = (props) => {
             <Button
               variant="contained"
               onClick={dialogHandleCloseX}
-              color="secondary"
+              color="primary"
+              style={{backgroundColor:'blue'}}
             >
               Cancelar
             </Button>
@@ -224,6 +227,7 @@ const TipoCampanaTb = (props) => {
               variant="contained"
               onClick={eliminarTipoCampana}
               color="primary"
+              style={{backgroundColor:'green'}}
             >
               Aceptar
             </Button>

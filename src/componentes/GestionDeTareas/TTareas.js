@@ -228,7 +228,7 @@ export default function TTareas(props) {
                   <TableCell align="left">{tarea.asignadopor}</TableCell>
                   <TableCell align="left">
                     {tarea.motivocancelacion === null ? (
-                      <Typography color="secondary">PENDIENTE</Typography>
+                      <Typography color="">PENDIENTE</Typography>
                     ) : (
                       <Typography style={{ color: '#357a38' }}>
                         COMPLETADO

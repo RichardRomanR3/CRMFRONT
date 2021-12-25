@@ -228,7 +228,7 @@ function App() {
               <RutaSegura exact path="/auditoria" component={Auditoria} />
               <RutaSegura
                 exact
-                path="/panelReporteSobreClientes"
+                path="/panelReporteSobreCliente"
                 component={PanelReporteSobreClientes}
               />
               <RutaSegura

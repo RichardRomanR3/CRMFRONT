@@ -68,7 +68,7 @@ export default function PerfilTarea(props) {
     setContenido(value.toString("html"));
   };
   const ingresarValoresMemoria = (e) => {
-    const{value}=e.target;
+    const { value } = e.target;
     setComentario(value);
   };
   const mostrarDirecciones = () => {
@@ -234,17 +234,17 @@ export default function PerfilTarea(props) {
   const volver = () => {
     props.history.goBack();
   };
-  const agregarComentarioATarea =()=>{
-    const objetoComentario={
-      comentario:comentario,
-      TAREA_Id:tarea.TAREA_ID
-    }
-    nuevoComentarioDeTarea(objetoComentario).then((response)=>{
-      if(response.status ===200){
-        setComentario('');
+  const agregarComentarioATarea = () => {
+    const objetoComentario = {
+      comentario: comentario,
+      TAREA_Id: tarea.TAREA_ID,
+    };
+    nuevoComentarioDeTarea(objetoComentario).then((response) => {
+      if (response.status === 200) {
+        setComentario("");
       }
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     if (mounted.current) {
@@ -511,7 +511,10 @@ export default function PerfilTarea(props) {
                 <Typography>Comentarios:</Typography>
               </Grid>
               <Grid item xs={12} md={12}>
-                <ComentariosDeTareas tareaId={tarea.TAREA_ID} comentario={comentario} />
+                <ComentariosDeTareas
+                  tareaId={tarea.TAREA_ID}
+                  comentario={comentario}
+                />
               </Grid>
             </Grid>
             <Grid item xs={12} md={12}>
@@ -525,7 +528,11 @@ export default function PerfilTarea(props) {
               />
             </Grid>
             <Grid item xs={12} md={12}>
-              <Button color="primary" variant="contained" onClick={agregarComentarioATarea}>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={agregarComentarioATarea}
+              >
                 Comentar
               </Button>
             </Grid>
@@ -540,7 +547,7 @@ export default function PerfilTarea(props) {
               <Grid item xs={12} md={6}>
                 <Button
                   variant="contained"
-                  color="secondary"
+                  color="primary"
                   style={style.submit}
                   onClick={dialogHandleClickOpen}
                 >
@@ -551,7 +558,7 @@ export default function PerfilTarea(props) {
                 <Button
                   onClick={volver}
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   style={style.submit}
                 >
                   Cancelar
@@ -565,7 +572,7 @@ export default function PerfilTarea(props) {
                 <Button
                   onClick={volver}
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   style={style.submit}
                 >
                   Volver
@@ -601,7 +608,8 @@ export default function PerfilTarea(props) {
             <Button
               onClick={dialogHandleClose}
               variant="contained"
-              color="secondary"
+              style={{ backgroundColor: "blue" }}
+              color="primary"
             >
               Cancelar
             </Button>
@@ -612,7 +620,12 @@ export default function PerfilTarea(props) {
             >
               Cerrar y Crear Nueva Tarea
             </Button>
-            <Button variant="contained" onClick={cerrarTarea} color="primary">
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={cerrarTarea}
+              style={{ backgroundColor: "green" }}
+            >
               Cerrar
             </Button>
           </DialogActions>

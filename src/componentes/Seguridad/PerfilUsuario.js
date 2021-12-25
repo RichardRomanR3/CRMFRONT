@@ -219,7 +219,7 @@ const PerfilUsuario = () => {
                 label="Nro Telefono"
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={12}>
               <ReactImageUploadComponent
                 withIcon={false}
                 singleImage={true}

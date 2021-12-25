@@ -29,17 +29,17 @@ export default function PanelReporteSobreClientes() {
     };
   }, []);
   return (
-    <Container justify="center" maxWidth="md">
+    <Container justify="center" >
       <br />
       <br />
       <Typography variant="h5" align="center">
         Reportes sobre Clientes
       </Typography>
-      <Grid container spacing={1} alignItems="flex-end">
+      <Grid container alignItems="flex-end" direction='row'>
         <Grid item>
           <SearchIcon />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item>
           <TextField
             name="term"
             style={style.TextField}
@@ -48,6 +48,7 @@ export default function PanelReporteSobreClientes() {
           />
         </Grid>
       </Grid>
+      <br/>
       {datosCargados ? (
         <TSugerencias term={term} rows={DataS} />
       ) : (

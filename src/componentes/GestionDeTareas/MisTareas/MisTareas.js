@@ -51,7 +51,7 @@ const MisTareas = (props) => {
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
           <br />
-          <Grid container spacing={1} alignItems="flex-end">
+          <Grid container alignItems="flex-end" direction="row">
             <Grid item>
               <SearchIcon />
             </Grid>
@@ -67,6 +67,7 @@ const MisTareas = (props) => {
           </Grid>
         </Grid>
       </Grid>
+      <br/>
       <Grid item xs={12} md={12} sm={12} lg={12}>
         {datosCargados ? (
           <TTareas
