@@ -696,9 +696,9 @@ const PerfilCliente = (props) => {
                 label="Hobby?"
               />
             </Grid>
-            
-              <FormControl variant="outlined" style={{width:380}}>
-                <InputLabel style={{width:380}}>Campaña</InputLabel>
+            <Grid item xs={12} md={6}>
+            <FormControl variant="outlined" style={{width:"100%"}} >
+                <InputLabel style={{width:"100%"}}>Campaña</InputLabel>
                 <Select
                   labelId="demo-simple-select-outlined-label"
                   id="demo-simple-select-outlined"
@@ -716,8 +716,7 @@ const PerfilCliente = (props) => {
                   ))}
                 </Select>
               </FormControl>
-           
-
+            </Grid>
             <Grid item xs={12} md={6}>
               <TextareaAutosize
                 name="observaciones"
@@ -746,7 +745,6 @@ const PerfilCliente = (props) => {
                     <TableRow>
                       <TableCell align="left">Telefonos</TableCell>
                       <TableCell align="left">Detalles</TableCell>
-                      <TableCell align="left">Nivel de Prioridad</TableCell>
                       <TableCell align="left">Acciones</TableCell>
                     </TableRow>
                   </TableHead>
@@ -759,7 +757,6 @@ const PerfilCliente = (props) => {
                         <TableCell align="left">
                           {telefono.detallestelefono}
                         </TableCell>
-                        <TableCell align="left">{telefono.prioridad}</TableCell>
                         <TableCell>
                           <Button
                             onClick={() => eliminarTelefono(telefono)}

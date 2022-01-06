@@ -116,7 +116,6 @@ const TClientes = (props) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  console.log("KEEE ", termc);
   if (props.seleccionar === undefined) {
     return (
       <Paper className={classes.root}>

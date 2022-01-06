@@ -68,7 +68,8 @@ export default function TReporteSobreClientes(props) {
             mensaje: 'Se cambio el estado de la sugerencia',
           },
         });
-        window.location.reload();
+       props.ObtenerReportes();
+       cerrarDialog();
       }
     });
   };

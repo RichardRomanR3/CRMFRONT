@@ -775,6 +775,7 @@ const ClienteNuevo = (props) => {
                     }}
                   />
                 </Grid>
+                <br /><br />
               </div>
             );
           })}

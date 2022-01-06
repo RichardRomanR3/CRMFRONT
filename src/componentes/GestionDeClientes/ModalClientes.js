@@ -51,7 +51,6 @@ export default function ModalClientes({
     handleClose();
     setTermc('');
   };
-
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <Typography

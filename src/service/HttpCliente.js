@@ -18,6 +18,7 @@ const requestGenerico = {
   post: (url, body) => axios.post(url, body),
   put: (url, body) => axios.put(url, body),
   delete: (url) => axios.delete(url),
+  patch: (url, body) => axios.patch(url, body),
 };
 
 export default requestGenerico;

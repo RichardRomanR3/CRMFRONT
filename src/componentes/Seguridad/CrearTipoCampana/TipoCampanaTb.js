@@ -39,13 +39,15 @@ const TipoCampanaTb = (props) => {
 
   //TRAER LOS DATOS AL CARGAR EL COMPONENTE
   useEffect(() => {
-    obtenerTiposCampanas().then((response) => {
-      const Data = response.data;
-      setDatar(Data);
-      setDatosCargados(true);
-    });
+    FObtenerTiposCampanas();
   }, []);
-
+const FObtenerTiposCampanas =()=>{
+  obtenerTiposCampanas().then((response) => {
+    const Data = response.data;
+    setDatar(Data);
+    setDatosCargados(true);
+  });
+}
   //RRR: FUNCION BUSCAR DE TABLA
   function searchingTerm(term) {
     return function (x) {
@@ -88,7 +90,7 @@ const TipoCampanaTb = (props) => {
   const eliminarTipoCampana = () => {
     eliminarTc(campanaElimId).then((response) => {
       if (response.status === 200) {
-        window.location.reload();
+        FObtenerTiposCampanas();
         dispatch({
           type: 'OPEN_SNACKBAR',
           openMensaje: {
@@ -106,6 +108,7 @@ const TipoCampanaTb = (props) => {
           },
         });
       }
+      setOpenDialog(false);
     });
   };
 

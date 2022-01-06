@@ -17,17 +17,21 @@ export default function PanelReporteSobreClientes() {
   const [datosCargados, setDatosCargados] = useState(false);
   useEffect(() => {
     if (mounted.current) {
-      listarSugerencias().then((response) => {
-        if (response.status === 200) {
-          setDataS(response.data);
-          setDatosCargados(true);
-        }
-      });
+      ObtenerReportes();
     }
     return function cleanup() {
       mounted.current = false;
     };
   }, []);
+
+  const ObtenerReportes=()=>{
+    listarSugerencias().then((response) => {
+      if (response.status === 200) {
+        setDataS(response.data);
+        setDatosCargados(true);
+      }
+    });
+  }
   return (
     <Container justify="center" >
       <br />
@@ -50,7 +54,7 @@ export default function PanelReporteSobreClientes() {
       </Grid>
       <br/>
       {datosCargados ? (
-        <TSugerencias term={term} rows={DataS} />
+        <TSugerencias term={term} rows={DataS} ObtenerReportes={ObtenerReportes}/>
       ) : (
         <Grid container justify="center">
           <CircularProgress />

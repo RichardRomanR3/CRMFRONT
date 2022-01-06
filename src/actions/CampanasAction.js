@@ -24,7 +24,7 @@ export const registrarTipoCampana = (tipoCampana) => {
 };
 export const editarTipoCampana = (id, tipoCampanaMod) => {
   return new Promise((resolve, eject) => {
-    HttpCliente.put('/TIPOSCAMPANAS/' + id, tipoCampanaMod)
+    HttpCliente.patch('/TIPOSCAMPANAS/' + id, tipoCampanaMod)
       .then((response) => {
         resolve(response);
       })
@@ -46,7 +46,7 @@ export const registrarCampana = (campana) => {
 };
 export const editarCampana = (id, campanaMod) => {
   return new Promise((resolve, eject) => {
-    HttpCliente.put('/CAMPANAS/' + id, campanaMod)
+    HttpCliente.patch('/CAMPANAS/' + id, campanaMod)
       .then((response) => {
         resolve(response);
       })

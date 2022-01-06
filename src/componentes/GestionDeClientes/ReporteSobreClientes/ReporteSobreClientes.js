@@ -84,7 +84,7 @@ const ReporteSobreClientes = () => {
           });
           setClientes('');
           setContenido('');
-          setEditorValue(RichTextEditor.createValueFromString(contenido, 'html'));
+          setEditorValue(RichTextEditor.createValueFromString('', 'html'));
         } else {
           dispatch({
             type: 'OPEN_SNACKBAR',

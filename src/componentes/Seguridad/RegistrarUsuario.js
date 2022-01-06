@@ -16,7 +16,7 @@ import { registrarUsuario } from '../../actions/UsuariosAction';
 import { useStateValue } from '../../contexto/store';
 import { clavefuerte } from './ClaveFuerte';
 import { ObtenerListaRoles } from '../../actions/RolesAction';
-const RegistrarUsuario = () => {
+const RegistrarUsuario = (props) => {
   const mounted =useRef(true);
   //eslint-disable-next-line
   const [{ sesionUsuario }, dispatch] = useStateValue();
@@ -263,7 +263,7 @@ const RegistrarUsuario = () => {
           <br></br>
           <br></br>
 
-          <Grid container justify="center">
+          <Grid container justify="center" spacing={4}>
             <Grid item xs={12} md={6}>
               <Button
                 variant="contained"
@@ -272,6 +272,16 @@ const RegistrarUsuario = () => {
                 style={style.submit}
               >
                 Registrar
+              </Button>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={()=>props.history.goBack()}
+                style={style.submit}
+              >
+                Volver
               </Button>
             </Grid>
           </Grid>

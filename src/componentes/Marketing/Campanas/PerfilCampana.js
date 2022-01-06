@@ -16,6 +16,30 @@ import style from '../../Tools/Style.js';
 import { editarCampana } from '../../../actions/CampanasAction';
 import { useStateValue } from '../../../contexto/store';
 import { RegistrarAccion } from '../../../actions/AuditoriaAction';
+import NumberFormat from 'react-number-format';
+const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
+  const { onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={ref}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      decimalSeparator={','}
+      thousandSeparator={'.'}
+      isNumericString
+      prefix="₲ "
+    />
+  );
+});
+
 export function PerfilCampana(props) {
   //eslint-disable-next-line
   const [{ openSnackBar, sesionUsuario }, dispatch] = useStateValue();
@@ -121,6 +145,7 @@ export function PerfilCampana(props) {
         OBJETIVOS: props.location.state.objetivos,
         PRESUPUESTO: props.location.state.presupuesto,
       });
+      sertEstadoCampana(props.location.state.estadocampana);
       setDataCli(props.location.state.clientesLista);
       setDatag([
         { geografia: 'Local' },
@@ -238,14 +263,17 @@ export function PerfilCampana(props) {
               />
             </Grid>
             <Grid item xs={12} md={6}>
+              <Typography>Presupuesto: </Typography>
               <TextField
-                multiline
                 name="PRESUPUESTO"
-                value={campana.PRESUPUESTO}
+                value={campana.PRESUPUESTO === null || campana.PRESUPUESTO==undefined ? '':campana.PRESUPUESTO}
                 fullWidth
                 onChange={ingresarValoresMemoria}
                 variant="outlined"
-                label="Presupuesto"
+                InputProps={{
+                  inputComponent: NumberFormatCustom,
+                  shrink: true
+                }}
               />
             </Grid>
           </Grid>

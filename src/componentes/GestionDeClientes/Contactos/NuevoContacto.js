@@ -39,6 +39,7 @@ const NuevoContacto = (props) => {
   });
   const [modalBuscar, setModalBuscar] = useState(false);
   const [clienteId, setClienteId] = useState('');
+  const [datosCargados,setDatosCargados]=useState(false);
   const ingresarValoresMemoria = (e) => {
     const { name, value } = e.target;
     setContacto((anterior) => ({
@@ -138,6 +139,7 @@ const NuevoContacto = (props) => {
       obtenerClientes().then((response) => {
         const Data = response.data;
         setDatacl(Data);
+        setDatosCargados(true);
       });
     }
     return function cleanup() {
@@ -275,6 +277,7 @@ const NuevoContacto = (props) => {
               open={modalBuscar}
               handleClose={cerrarModal}
               seleccionarCliente={seleccionarCliente}
+              datosCargados={datosCargados}
             />
           </Grid>
         </form>

@@ -245,7 +245,6 @@ export default function PerfilTarea(props) {
       }
     });
   };
-
   useEffect(() => {
     if (mounted.current) {
       /*RRR: esta es una serie de verificaciones que debe hacer el modulo para 
@@ -257,7 +256,7 @@ export default function PerfilTarea(props) {
         USUARIOASIGNADO: props.location.state.usuarioasignado,
         CLIENTE_ID:
           props.location.state.cliente !== null
-            ? props.location.state.cliente.clientE_Id
+            ?props.location.state.cliente.clientE_Id
             : props.location.state.posiblecliente.posibleclientE_Id,
         FECHACREACION: props.location.state.fechacreacion,
         FECHAVTO: props.location.state.fechavto,
@@ -273,7 +272,7 @@ export default function PerfilTarea(props) {
             ? props.location.state.posiblecliente.nombre +
               " " +
               props.location.state.posiblecliente.apellido
-            : props.location.state.cliente.nombre
+            : props.location.state.cliente.nombre || props.location.state.cliente.apellido
             ? props.location.state.cliente.nombre +
               " " +
               props.location.state.cliente.apellido
@@ -288,9 +287,7 @@ export default function PerfilTarea(props) {
         setCierre({
           MOTIVODECIERRE: props.location.state.motivocancelacion,
         });
-      } else {
-        console.log("NO CUMPLIO");
-      }
+      } 
 
       obtenerTelefonosTareas(props.location.state.tareA_Id).then((response) => {
         const Data = response.data;
