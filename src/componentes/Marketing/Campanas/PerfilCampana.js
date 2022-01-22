@@ -266,7 +266,7 @@ export function PerfilCampana(props) {
               <Typography>Presupuesto: </Typography>
               <TextField
                 name="PRESUPUESTO"
-                value={campana.PRESUPUESTO === null || campana.PRESUPUESTO==undefined ? '':campana.PRESUPUESTO}
+                value={campana.PRESUPUESTO === null || campana.PRESUPUESTO===undefined ? '':campana.PRESUPUESTO}
                 fullWidth
                 onChange={ingresarValoresMemoria}
                 variant="outlined"

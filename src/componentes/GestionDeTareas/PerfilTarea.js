@@ -29,6 +29,7 @@ import {
   obtenerTareasNotificacion,
   nuevoComentarioDeTarea,
   obtenerTareasCerradas,
+  obtenerTareaPorId,
 } from "../../actions/TareasAction";
 import { useStateValue } from "../../contexto/store";
 import { useHistory } from "react-router-dom";
@@ -245,18 +246,63 @@ export default function PerfilTarea(props) {
       }
     });
   };
+
+  useEffect(() => {
+    if (mounted.current) {
+      if (props.location.state.id) {
+        obtenerTareaPorId(props.location.state.id).then((response) => {
+          if (response.status === 200) {
+            setTarea({
+              TAREA_ID:response.data[0].tareA_Id,
+              CODTAREA: response.data[0].codtarea,
+              USUARIOASIGNADO:response.data[0].usuarioasignado,
+              CLIENTE_ID: response.data[0].cliente.clientE_Id,
+              FECHACREACION: response.data[0].fechacreacion,
+              FECHAVTO: response.data[0].fechavto,
+              TIPOTAREA: response.data[0].tipotarea.descritipotarea,
+              NUMTAREA: response.data[0].numtarea,
+              CLIENTE: response.data[0].cliente.nombre+" "+response.data[0].cliente.apellido,
+            });
+             /*RRR: verifica si la tarea ya esta cerrada para mostrar el motivo de cancelacion
+      y ocultarlo en caso de que aun este pendiente de cierre*/
+      if (response.data[0].motivocancelacion !== null) {
+        setCierre({
+          MOTIVODECIERRE: props.location.state.motivocancelacion,
+        });
+      }
+
+      obtenerTelefonosTareas(response.data[0].tareA_Id).then((response) => {
+        const Data = response.data;
+        setDatatel(Data);
+      });
+      obtenerDireccionesTareas(response.data[0].tareA_Id).then(
+        (response) => {
+          const Data = response.data;
+          setDatadir(Data);
+        }
+      );
+          }
+        });
+
+        
+      }
+    }
+  }, [props]);
   useEffect(() => {
     if (mounted.current) {
       /*RRR: esta es una serie de verificaciones que debe hacer el modulo para 
       identificar si el perfil solicitado es de una tarea con 
       presupuestos o con facturas*/
+      if(!props.location.state.id){
+
+      
       setTarea({
         TAREA_ID: props.location.state.tareA_Id,
         CODTAREA: props.location.state.codtarea,
         USUARIOASIGNADO: props.location.state.usuarioasignado,
         CLIENTE_ID:
           props.location.state.cliente !== null
-            ?props.location.state.cliente.clientE_Id
+            ? props.location.state.cliente.clientE_Id
             : props.location.state.posiblecliente.posibleclientE_Id,
         FECHACREACION: props.location.state.fechacreacion,
         FECHAVTO: props.location.state.fechavto,
@@ -272,7 +318,8 @@ export default function PerfilTarea(props) {
             ? props.location.state.posiblecliente.nombre +
               " " +
               props.location.state.posiblecliente.apellido
-            : props.location.state.cliente.nombre || props.location.state.cliente.apellido
+            : props.location.state.cliente.nombre ||
+              props.location.state.cliente.apellido
             ? props.location.state.cliente.nombre +
               " " +
               props.location.state.cliente.apellido
@@ -287,7 +334,7 @@ export default function PerfilTarea(props) {
         setCierre({
           MOTIVODECIERRE: props.location.state.motivocancelacion,
         });
-      } 
+      }
 
       obtenerTelefonosTareas(props.location.state.tareA_Id).then((response) => {
         const Data = response.data;
@@ -300,6 +347,7 @@ export default function PerfilTarea(props) {
         }
       );
     }
+  }
     return function cleanup() {
       mounted.current = false;
     };

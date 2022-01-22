@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import { obtenerEventos } from "../../actions/ReportesAction";
 import "react-big-calendar/lib/css/react-big-calendar.css"
@@ -9,6 +10,7 @@ const localizer = momentLocalizer(moment);
 export default function CalendarioPersonal() {
   const [eventos, setEventos] = useState([]);
   const [{sesionUsuario}]=useStateValue();
+  const history = useHistory();
   useEffect(() => {
     obtenerEventos(sesionUsuario.usuario.id).then((response) => {
       if (response.status === 200) {
@@ -19,6 +21,9 @@ export default function CalendarioPersonal() {
   return (
     <Calendar
       resizable
+      onSelectEvent={(event)=>{
+history.push({ pathname: '/perfilTarea', state: event })
+      }}
       views={''}
       localizer={localizer}
       defaultDate={new Date()}
